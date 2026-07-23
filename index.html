@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>LandNow - Private Land & Water Rights Network</title>
+  <meta name="description"
+    content="LandNow is a private network of operators, cash investors, and asset owners collaborating on raw land acquisitions, senior water rights optimization, and off-market deal flow." />
+  <meta property="og:title" content="LandNow - Private Land & Water Rights Network" />
+  <meta property="og:description"
+    content="LandNow is a private network of operators, cash investors, and asset owners collaborating on raw land acquisitions, senior water rights optimization, and off-market deal flow." />
+  <meta property="og:image" content="https://landnow.isira.club/logo.png" />
+  <meta property="og:image:secure_url" content="https://landnow.isira.club/logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:url" content="https://landnow.isira.club/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LandNow" />
+ 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LandNow - Private Land & Water Rights Network" />
+  <meta name="twitter:description"
+    content="LandNow is a private network of operators, cash investors, and asset owners collaborating on raw land acquisitions, senior water rights optimization, and off-market deal flow." />
+  <meta name="twitter:image" content="https://landnow.isira.club/logo.png" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;700&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ln-brown': '#3d372e', 'ln-tan': '#b5925a', 'ln-cream': '#e5e0d4',
+            'ln-dark-tan': '#8c7046', 'ln-light-tan': '#d6c9b1',
+          },
+          fontFamily: { serif: ['"Libre Baskerville"', 'serif'], sans: ['Outfit', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    h1,
+    h2,
+    h3,
+    .serif-font {
+      font-family: 'Libre Baskerville', serif;
+      letter-spacing: -0.02em;
+    }
+
+    .text-outline {
+      -webkit-text-stroke: 1px currentColor;
+      color: transparent;
+    }
+
+    .hero-card-shadow {
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .float-slow {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes ken-burns {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .ken-burns {
+      animation: ken-burns 20s ease-in-out infinite;
+    }
+
+    @keyframes pulse-soft {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .pulse-soft {
+      animation: pulse-soft 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-accent {
+
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .pulse-accent {
+      animation: pulse-accent 2.5s ease-in-out infinite;
+    }
+
+    @keyframes drift-slow {
+      0% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(20px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .drift-slow {
+      animation: drift-slow 12s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .gradient-shift {
+      background-size: 200% 200%;
+      animation: gradient-shift 8s ease infinite;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.93);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.is-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    .delay-5 {
+      transition-delay: 0.5s;
+    }
+
+
+
+    /* Footer */
+    .ln-footer {
+      background: #1c1917;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ln-footer-inner {
+      display: flex;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ln-footer-left {
+      flex: 0 0 82%;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid rgba(199, 163, 122, 0.12);
+    }
+
+    .ln-footer-right {
+      flex: 0 0 18%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 32px;
+    }
+
+    .ln-footer-nav {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ln-footer-nav li {
+      border-bottom: 1px solid rgba(199, 163, 122, 0.10);
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .ln-footer-nav li:first-child {
+      border-top: 1px solid rgba(199, 163, 122, 0.10);
+    }
+
+    .ln-footer-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: #C7A37A;
+      text-decoration: none;
+      padding: 0 40px;
+      transition: color 0.3s ease, padding-left 0.3s ease;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .ln-footer-nav a:hover {
+      color: #ddc4a0;
+      padding-left: 48px;
+    }
+
+    .ln-footer-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .ln-footer-pill {
+      width: 48px;
+      height: 32px;
+      border-radius: 16px;
+      border: 1px solid rgba(199, 163, 122, 0.25);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #C7A37A;
+    }
+
+    .ln-footer-pill:hover {
+      background: rgba(199, 163, 122, 0.1);
+      border-color: rgba(199, 163, 122, 0.4);
+    }
+
+    .ln-footer-pill svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ln-footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .ln-footer-social a:hover {
+      background: rgba(199, 163, 122, 0.1);
+      border-color: rgba(199, 163, 122, 0.4);
+      transform: scale(1.05);
+    }
+
+    .ln-footer-email {
+      display: flex;
+      justify-content: center;
+    }
+
+    .ln-footer-email a {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(199, 163, 122, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C7A37A;
+      transition: all 0.3s ease;
+    }
+
+    .ln-footer-email a:hover {
+      background: rgba(199, 163, 122, 0.1);
+      border-color: rgba(199, 163, 122, 0.4);
+      transform: scale(1.05);
+    }
+
+    .ln-footer-email svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ln-footer-legal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ln-footer-legal a,
+    .ln-footer-legal span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(199, 163, 122, 0.45);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(199, 163, 122, 0.08);
+      transition: color 0.3s ease;
+    }
+
+    .ln-footer-legal a:first-child {
+      border-top: 1px solid rgba(199, 163, 122, 0.08);
+    }
+
+    .ln-footer-legal a:hover {
+      color: #C7A37A;
+    }
+
+    .ln-footer-attr {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      color: rgba(199, 163, 122, 0.35);
+      margin-top: 20px;
+    }
+
+    .ln-footer-wordmark {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0.78;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ln-footer-wordmark h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14vw;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: rgba(199, 163, 122, 0.05);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      line-height: 0.78;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    @media (max-width: 767px) {
+      .ln-footer-inner {
+        flex-direction: column;
+      }
+
+      .ln-footer-left {
+        flex: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(199, 163, 122, 0.12);
+      }
+
+      .ln-footer-right {
+        flex: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 32px 24px;
+        gap: 24px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ln-footer-email {
+        order: -1;
+        width: 100%;
+      }
+
+      .ln-footer-legal {
+        width: 100%;
+      }
+
+      .ln-footer-nav a {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        padding: 0 24px;
+      }
+
+      .ln-footer-nav a:hover {
+        padding-left: 32px;
+      }
+
+      .ln-footer-wordmark h2 {
+        font-size: 18vw;
+      }
+    }
+
+    /* Floating Trigger Button */
+    #lead-trigger {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: #b5925a;
+      color: #1c1917;
+      border: none;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(0);
+      border-radius: 0;
+    }
+
+    #lead-trigger:hover {
+      background: #8c7046;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    #lead-trigger svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    #lead-trigger .lt-text {
+      display: inline-block;
+    }
+
+    @media (max-width: 480px) {
+      #lead-trigger {
+        bottom: 16px;
+        right: 16px;
+        padding: 10px 16px;
+        font-size: 10px;
+      }
+
+      #lead-trigger .lt-text-short {
+        display: inline;
+      }
+
+      #lead-trigger .lt-text-full {
+        display: none;
+      }
+    }
+
+    @media (min-width: 481px) {
+      #lead-trigger .lt-text-short {
+        display: none;
+      }
+
+      #lead-trigger .lt-text-full {
+        display: inline;
+      }
+    }
+
+    /* Lead Capture Popup */
+    /* Lead Capture Popup */
+    #lead-popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(8, 18, 15, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+
+    #lead-popup-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #lead-popup {
+      background: #fdfbf7;
+      border: 1px solid rgba(181, 146, 90, 0.25);
+      max-width: 960px;
+      width: 100%;
+      position: relative;
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 50px 100px -24px rgba(0, 0, 0, 0.55);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+    }
+
+    #lead-popup-overlay.active #lead-popup {
+      transform: translateY(0) scale(1);
+    }
+
+    #lead-popup-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(61, 55, 46, 0.15);
+      cursor: pointer;
+      color: #3d372e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2100;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 0;
+    }
+
+    #lead-popup-close:hover {
+      background: #3d372e;
+      color: #ffffff;
+      border-color: #3d372e;
+      transform: scale(1.05);
+    }
+
+    .lp-inner {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .lp-visual {
+      background: linear-gradient(135deg, #050b09 0%, #0c1c16 100%);
+      padding: 40px 24px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-right: 1px solid rgba(181, 146, 90, 0.1);
+    }
+
+    .lp-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(181, 146, 90, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .lp-mockup-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 220px;
+      margin: 0 auto;
+    }
+
+    .lp-mockup-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(15px 25px 35px rgba(0, 0, 0, 0.75));
+      border-radius: 4px;
+      animation: lp-float 5s ease-in-out infinite;
+    }
+
+    .lp-visual-text {
+      margin-top: 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .lp-visual-badge {
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #b5925a;
+      background: rgba(181, 146, 90, 0.1);
+      padding: 4px 10px;
+      border: 1px solid rgba(181, 146, 90, 0.2);
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .lp-visual-desc {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      color: rgba(229, 224, 212, 0.65);
+      line-height: 1.5;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    .lp-content {
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    #lead-popup .lp-badge {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #b5925a;
+      margin-bottom: 8px;
+    }
+
+    #lead-popup .lp-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.8rem;
+      color: #3d372e;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      font-weight: 400;
+    }
+
+    #lead-popup .lp-desc {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      color: rgba(61, 55, 46, 0.75);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    #lead-popup .lp-field {
+      margin-bottom: 12px;
+    }
+
+    #lead-popup .lp-field label {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(61, 55, 46, 0.6);
+      margin-bottom: 4px;
+    }
+
+    #lead-popup .lp-field input {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid rgba(61, 55, 46, 0.15);
+      padding: 10px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      color: #3d372e;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      border-radius: 0;
+    }
+
+    #lead-popup .lp-field input:focus {
+      border-color: #b5925a;
+      background: #ffffff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(181, 146, 90, 0.1);
+    }
+
+    #lead-popup .lp-field input::placeholder {
+      color: rgba(61, 55, 46, 0.3);
+    }
+
+    #lead-popup .lp-submit {
+      width: 100%;
+      background: #3d372e;
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-top: 6px;
+    }
+
+    #lead-popup .lp-submit:hover {
+      background: #b5925a;
+    }
+
+    #lead-popup .lp-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #lead-popup .lp-submit-sample {
+      background: #e5e0d4;
+      color: #000000;
+      text-transform: none;
+      border: 1px solid rgba(61, 55, 46, 0.2);
+    }
+
+    #lead-popup .lp-submit-sample:hover {
+      background: #d6c9b1;
+      color: #000000;
+    }
+
+    #lead-popup .lp-submit-gold {
+      background: #1b5e20;
+      color: #ffd700;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    #lead-popup .lp-submit-gold:hover {
+      background: #2e7d32;
+      color: #ffd700;
+    }
+
+    .lp-micro-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+      border-top: 1px solid rgba(61, 55, 46, 0.08);
+      padding-top: 10px;
+    }
+
+    .lp-micro-item {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: rgba(61, 55, 46, 0.45);
+    }
+
+    .lp-skip {
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(61, 55, 46, 0.4);
+      cursor: pointer;
+      margin: 12px auto 0;
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .lp-skip:hover {
+      color: #3d372e;
+      text-decoration: underline;
+    }
+
+    #lead-popup .lp-privacy {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 9.5px;
+      color: rgba(61, 55, 46, 0.35);
+      margin-top: 8px;
+    }
+
+    .lp-msg {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      text-align: center;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+
+    @keyframes lp-float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .lp-inner {
+        flex-direction: row;
+      }
+
+      .lp-visual {
+        display: flex;
+        width: 38%;
+        padding: 48px 32px;
+      }
+
+      .lp-content {
+        width: 62%;
+        padding: 44px 48px 40px;
+      }
+
+      #lead-popup .lp-title {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Newsletter box in footer */
+    .ln-newsletter {
+      padding: 28px 40px;
+      border-top: 1px solid rgba(199, 163, 122, 0.10);
+    }
+
+    .ln-newsletter-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ln-newsletter p {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(199, 163, 122, 0.55);
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .ln-newsletter-form {
+      display: flex;
+      flex: 1;
+      min-width: 220px;
+      gap: 0;
+    }
+
+    .ln-newsletter-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(199, 163, 122, 0.18);
+      border-right: none;
+      padding: 10px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      color: #C7A37A;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .ln-newsletter-form input::placeholder {
+      color: rgba(199, 163, 122, 0.3);
+    }
+
+    .ln-newsletter-form input:focus {
+      border-color: rgba(199, 163, 122, 0.45);
+    }
+
+    .ln-newsletter-form button {
+      background: rgba(199, 163, 122, 0.15);
+      border: 1px solid rgba(199, 163, 122, 0.25);
+      color: #C7A37A;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .ln-newsletter-form button:hover {
+      background: rgba(199, 163, 122, 0.25);
+    }
+
+    #newsletter-msg {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      color: rgba(199, 163, 122, 0.6);
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
+
+    @media (max-width: 767px) {
+      .ln-newsletter {
+        padding: 24px 24px;
+      }
+
+      .ln-newsletter-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ln-newsletter-form {
+        min-width: unset;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-ln-cream text-ln-brown font-sans overflow-x-hidden">
+
+    <section class="relative min-h-screen flex items-center justify-center px-4 md:px-12 overflow-hidden bg-black"
+      data-nav="dark">
+      <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"
+        poster="hero-bg.png" src="hero-bg.mp4"></video>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 pointer-events-none"></div>
+      <div class="absolute top-6 left-6 z-50">
+        <img src="logo.png" alt="LandNow" class="h-[72px] md:h-[88px] w-auto" />
+      </div>
+      <div class="relative z-10 flex flex-col items-center w-full max-w-5xl mx-auto py-24 text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl serif-font leading-snug tracking-wide text-white mb-8">America is for sale &amp; the rest of the world is following. Globally land is exchanging hands, being bought and sold, at unprecedented rates.</h1>
+        <p class="text-base md:text-lg leading-relaxed text-white/80 mb-10 max-w-3xl">But just as significant - what is the next major asset class of our generation? (Even bigger than the prospect of AI &amp; Cryptocurrency!?) - Its Water Rights. Are you going to seek and employ the knowledge necessary to be a part of this transformation of wealth? Or will you sit on the sidelines waiting for reparations or the next stimulus? We're called LandNOW for a reason!</p>
+        <div class="flex flex-col items-center gap-4 w-full mt-4">
+          <button id="hero-access-btn" type="button"
+            class="cta-btn bg-ln-tan text-ln-brown text-lg md:text-xl uppercase tracking-[0.2em] font-bold hover:bg-ln-dark-tan transition-all text-center px-12 md:px-20 py-6 hero-card-shadow border-0 cursor-pointer">
+            GET ACCESS NOW
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-20 bg-ln-cream" id="membership" data-nav="light">
+      <div class="flex flex-col md:flex-row max-w-6xl mx-auto gap-10 md:gap-16 items-start">
+        <div class="w-full md:w-1/2 reveal">
+          <div class="bg-ln-light-tan/40 p-8 md:p-10">
+            <form id="entry-form" class="space-y-6">
+              <!-- Form Header -->
+              <div class="mb-2">
+                <h3 class="text-xl font-bold text-ln-brown serif-font" id="form-title">Membership Application</h3>
+                <p class="text-[11px] text-ln-brown/60 leading-relaxed mt-1">Due to high volume in our community (15,280+ members), response times for free inquiries may be slower. Standard paid members (Access All E-Books) bypass manual review wait times.</p>
+              </div>
+
+              <!-- Wizard Steps -->
+              <div id="wizard-step-container">
+                <!-- Step 1: Self-Classification (The Sorting Step) -->
+                <div class="wizard-step space-y-4" data-step="1">
+                  <div>
+                    <span class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-3">Which profile best describes you?</span>
+                    <div class="grid grid-cols-1 gap-3">
+                      <!-- Profile 1: Cash Investor -->
+                      <label class="relative flex flex-col p-4 bg-white border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group" id="card-profile-investor">
+                        <input type="radio" name="user-profile" value="cash-investor" class="sr-only" />
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-sm text-ln-brown">Active Cash Investor 💰</span>
+                          <span class="text-[10px] font-semibold text-ln-tan bg-ln-tan/10 px-2 py-0.5 rounded">Learning + Capital</span>
+                        </div>
+                        <p class="text-xs text-ln-brown/70 mt-1 leading-relaxed">I have capital ready to invest, want to learn, and want a community to grow with.</p>
+                      </label>
+
+                      <!-- Profile 2: Asset Owner -->
+                      <label class="relative flex flex-col p-4 bg-white border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group" id="card-profile-owner">
+                        <input type="radio" name="user-profile" value="asset-owner" class="sr-only" />
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-sm text-ln-brown">Existing Asset Owner 🌾</span>
+                          <span class="text-[10px] font-semibold text-ln-brown/60 bg-ln-brown/5 px-2 py-0.5 rounded">Owner / Operator</span>
+                        </div>
+                        <p class="text-xs text-ln-brown/70 mt-1 leading-relaxed">I already own land/water rights and want resources & community to optimize them.</p>
+                      </label>
+
+                      <!-- Profile 3: Tire Kicker -->
+                      <label class="relative flex flex-col p-4 bg-white border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group" id="card-profile-kicker">
+                        <input type="radio" name="user-profile" value="tire-kicker" class="sr-only" />
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-sm text-ln-brown">Observer / Learner 💬</span>
+                          <span class="text-[10px] font-semibold text-ln-brown/40 bg-ln-brown/5 px-2 py-0.5 rounded">Just Browsing</span>
+                        </div>
+                        <p class="text-xs text-ln-brown/70 mt-1 leading-relaxed">I'm just browsing, not ready to invest time/money, and want to learn on my own.</p>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 2: Profile-Specific Questions (Dynamic) -->
+                <div class="wizard-step space-y-4 hidden" data-step="2">
+                  <!-- Substep: Investor Profile -->
+                  <div id="profiling-investor-fields" class="space-y-4 hidden">
+                    <div>
+                      <label for="entry-experience" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Investment Experience</label>
+                      <select id="entry-experience" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors">
+                        <option value="">Select experience level</option>
+                        <option value="accredited">Accredited investor — active in real assets</option>
+                        <option value="experienced">Experienced investor — new to land/water</option>
+                        <option value="intermediate">Some exposure — looking to scale</option>
+                        <option value="beginner">New to investing — building knowledge</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="entry-investment" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Target Investment Range</label>
+                      <select id="entry-investment" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors">
+                        <option value="">Select range</option>
+                        <option value="under-100k">Under $100K</option>
+                        <option value="100k-500k">$100K – $500K</option>
+                        <option value="500k-1m">$500K – $1M</option>
+                        <option value="1m-5m">$1M – $5M</option>
+                        <option value="5m-plus">$5M+</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="entry-company-investor" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Company / Role</label>
+                      <input type="text" id="entry-company-investor" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="e.g. Real Estate Partner, Fund Manager, etc." />
+                    </div>
+                  </div>
+
+                  <!-- Substep: Asset Owner Profile -->
+                  <div id="profiling-owner-fields" class="space-y-4 hidden">
+                    <div>
+                      <label for="entry-asset-details" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Specify Holdings & Water Rights</label>
+                      <textarea id="entry-asset-details" rows="3" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors resize-none" placeholder="e.g. 160 acres in Colorado with senior water rights, dryland farm in Kansas..."></textarea>
+                    </div>
+                    <div>
+                      <label for="entry-company-owner" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Company / Operational Role</label>
+                      <input type="text" id="entry-company-owner" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="e.g. Farm Manager, Landowner, Forester..." />
+                    </div>
+                  </div>
+
+                  <!-- Substep: Explorer Notice -->
+                  <div id="profiling-kicker-fields" class="space-y-4 hidden text-center py-6 bg-white/30 border border-ln-brown/10 p-6 rounded-lg animate-fade-in">
+                    <span class="text-3xl">📋</span>
+                    <h4 class="font-bold text-ln-brown serif-font text-lg mt-2">Free Resource Pipeline</h4>
+                    <p class="text-xs leading-relaxed text-ln-brown/70 mt-2">Since you're exploring, we will fast-track you to receive our free land & water due diligence checklists and infographics. The private Discord, flagship eBook series, and deal flow channels are reserved for active onboarded investors/owners, but our newsletters will keep you informed.</p>
+                  </div>
+                </div>
+
+                <!-- Step 3: Admission Choice (Bypassed for Explorers) -->
+                <div class="wizard-step space-y-4 hidden" data-step="3">
+                  <div>
+                    <span class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-3">Admission Preference</span>
+                    <div class="grid grid-cols-1 gap-3">
+                      <!-- Choice 1: Standard Payment -->
+                      <label class="relative flex flex-col p-4 bg-white border-2 border-ln-tan rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group" id="card-admission-payment">
+                        <input type="radio" name="admission-type" value="payment" checked class="sr-only" />
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-sm text-ln-brown">Standard Fast-Track</span>
+                          <span class="text-xs font-semibold text-ln-tan bg-ln-tan/10 px-2 py-0.5 rounded">Access All E-Books</span>
+                        </div>
+                        <p class="text-xs text-ln-brown/70 mt-1 leading-relaxed">Instant approval processing. Redirects to secure checkout to instantly unlock all books, resources, and community Slack access.</p>
+                      </label>
+ 
+                      <!-- Choice 2: Barter Exchange (Hidden for standard onboarding, reserved for high-ticket tiers) -->
+                      <label class="relative flex flex-col p-4 bg-white/40 border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white/80 transition-all shadow-sm group" id="card-admission-barter" style="display: none !important;">
+                        <input type="radio" name="admission-type" value="barter" class="sr-only" />
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-sm text-ln-brown/80 group-hover:text-ln-brown">Barter / Value Exchange</span>
+                          <span class="text-[10px] font-medium text-ln-brown/60 bg-ln-brown/5 px-2 py-0.5 rounded">Waiver Request</span>
+                        </div>
+                        <p class="text-xs text-ln-brown/60 mt-1 leading-relaxed">Submit a waiver request by bringing specific value (e.g. off-market deals, local research) to the network. Requires manual review.</p>
+                      </label>
+                      <p class="text-[11px] leading-relaxed text-ln-brown/60 mt-1 italic">*Note: Barter/value exchange waivers are not accepted for standard community onboarding. Onboarding is required to verify intent and offset automated processing. Barter options only apply to higher-tier enterprise/high-ticket partnerships.</p>
+                    </div>
+                  </div>
+
+                  <!-- Barter Detail Field (Dynamic collapse/expand) -->
+                  <div id="barter-detail-container" class="hidden overflow-hidden transition-all duration-300 max-h-0">
+                    <label for="entry-barter-contribution" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">What value can you contribute?</label>
+                    <textarea id="entry-barter-contribution" rows="3" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors resize-none" placeholder="e.g. Off-market deal flow, water rights expertise, local land research, development playbooks..."></textarea>
+                  </div>
+                </div>
+
+                <!-- Step 4: Contact & Referral (Universal Gate) -->
+                <div class="wizard-step space-y-4 hidden" data-step="4">
+                  <div>
+                    <label for="entry-name" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Full Name</label>
+                    <input type="text" id="entry-name" required class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="Your full name" />
+                  </div>
+                  <div>
+                    <label for="entry-email" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Email Address</label>
+                    <input type="email" id="entry-email" required class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="you@example.com" />
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label for="entry-phone" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Phone Number</label>
+                      <input type="tel" id="entry-phone" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="+1 (555) 000-0000" />
+                    </div>
+                    <div>
+                      <label for="entry-location" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Location</label>
+                      <input type="text" id="entry-location" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="City, State / Country" />
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label for="entry-social" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Social Platform</label>
+                      <select id="entry-social" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors">
+                        <option value="">Select platform</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="X">X (Twitter)</option>
+                        <option value="Threads">Threads</option>
+                        <option value="Discord">Discord</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="entry-handle" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Handle</label>
+                      <input type="text" id="entry-handle" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="@username" />
+                    </div>
+                  </div>
+                  <div>
+                    <label for="entry-referral" class="text-[11px] md:text-sm uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Referred By</label>
+                    <input type="text" id="entry-referral" class="w-full bg-white/60 border border-ln-brown/20 px-4 py-3.5 text-base text-ln-brown outline-none focus:border-ln-tan transition-colors" placeholder="Who referred you?" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Wizard Progress Footer -->
+              <div class="pt-4 border-t border-ln-brown/10">
+                <div class="flex justify-between items-center mb-2">
+                  <span id="wizard-step-title"
+                    class="text-[11px] uppercase tracking-wider text-ln-brown font-semibold">Step 1 of 4: Profile Selection</span>
+                  <span id="wizard-step-percent" class="text-[11px] text-ln-brown/60">0% Complete</span>
+                </div>
+                <div class="w-full bg-ln-brown/10 h-1 rounded-full overflow-hidden">
+                  <div id="wizard-progress-bar" class="bg-ln-tan h-full w-0 transition-all duration-300"></div>
+                </div>
+              </div>
+
+              <!-- Navigation Controls -->
+              <div class="flex items-center gap-3 pt-2">
+                <button type="button" id="wizard-prev"
+                  class="hidden w-1/3 border border-ln-brown/25 text-ln-brown py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-white transition-all">
+                  Back
+                </button>
+                <button type="button" id="wizard-next"
+                  class="w-full bg-ln-brown text-white py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-ln-dark-tan transition-all">
+                  Continue
+                </button>
+                <button type="submit" id="entry-submit"
+                  class="hidden w-full bg-ln-brown text-white py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-ln-dark-tan transition-all">
+                  Submit
+                </button>
+              </div>
+
+              <div id="entry-result" class="text-center text-xs mt-2 hidden"></div>
+            </form>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 hidden md:block">
+          <div class="relative overflow-hidden h-full min-h-[400px]">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover absolute inset-0"
+              poster="building-drone-shot.png" src="building-drone-shot.mp4"></video>
+            <div class="absolute inset-0 border border-ln-brown/10 pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2B: Embedded Chatbot Section -->
+    <section class="py-24 px-6 md:px-20 bg-white overflow-hidden border-t border-ln-brown/10" id="chat-agent-section" data-nav="light">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-stretch">
+        <div class="w-full md:w-1/2 flex flex-col justify-center">
+          <p class="text-[10px] uppercase tracking-[0.25em] text-ln-tan font-bold mb-3">Representative Desk</p>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl serif-font leading-tight mb-6">Ask our Representative</h2>
+          <p class="text-sm md:text-base leading-7 text-ln-brown/70">Have questions about senior appropriative water rights, exit playbooks, or co-flip partnerships? Speak with our team instantly.</p>
+          <p class="text-xs text-ln-brown/60 mt-4 italic font-serif">Note: Verification details are required to unlock conversation access.</p>
+        </div>
+        <div class="w-full md:w-1/2 bg-white border border-ln-brown/10 shadow-xl p-8 relative flex flex-col min-h-[480px]">
+          <div id="inline-chat-gate" class="absolute inset-0 bg-white p-8 flex flex-col justify-center z-10">
+            <h3 class="text-lg serif-font text-ln-brown mb-6 text-center">Speak with our Representative</h3>
+            <form id="inline-chat-gate-form" class="space-y-4">
+              <div>
+                <label for="icg-name" class="block text-xs uppercase tracking-wider font-bold mb-1">Full Name</label>
+                <input type="text" id="icg-name" placeholder="Name" required class="w-full p-3 border border-ln-tan/30 outline-none bg-white text-ln-brown text-sm" />
+              </div>
+              <div>
+                <label for="icg-phone" class="block text-xs uppercase tracking-wider font-bold mb-1">Mobile Number</label>
+                <input type="tel" id="icg-phone" placeholder="Mobile" required class="w-full p-3 border border-ln-tan/30 outline-none bg-white text-ln-brown text-sm" />
+              </div>
+              <div>
+                <label for="icg-email" class="block text-xs uppercase tracking-wider font-bold mb-1">Email Address</label>
+                <input type="email" id="icg-email" placeholder="Email" required class="w-full p-3 border border-ln-tan/30 outline-none bg-white text-ln-brown text-sm" />
+              </div>
+              <div id="icg-msg" class="text-xs font-semibold text-red-600"></div>
+              <button type="submit" class="w-full py-4 bg-ln-brown hover:bg-ln-dark-tan text-white text-xs font-semibold uppercase tracking-[0.2em] transition-all">
+                Connect Now
+              </button>
+            </form>
+          </div>
+          <!-- Chat Interface -->
+          <div id="inline-chat-messages" class="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 max-h-[380px]" style="display:none;">
+            <div class="ln-chat-message bot">
+              Connecting to representative...
+            </div>
+          </div>
+          <div id="inline-chat-input-wrapper" style="display:none;">
+            <form id="inline-chat-form" class="flex gap-2">
+              <input type="text" id="inline-chat-input" placeholder="Ask anything..." required class="flex-1 p-3 border border-ln-tan/30 outline-none bg-white text-ln-brown text-sm" />
+              <button type="submit" class="px-5 py-3 bg-ln-brown hover:bg-ln-dark-tan text-white text-xs font-semibold uppercase tracking-[0.1em]">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-20 bg-ln-cream overflow-hidden" id="what-you-get" data-nav="light">
+      <div class="max-w-5xl mx-auto text-center mb-14 reveal">
+        <h2 class="text-3xl md:text-5xl serif-font max-w-3xl mx-auto leading-tight">The Moment You Join</h2>
+        <p class="text-base md:text-lg leading-8 text-ln-brown/70 max-w-xl mx-auto mt-5 reveal delay-1">Step into the
+          network. You&rsquo;ll get
+          increasing access to gurus and independent partners as you go &mdash; courses are available only if
+          you&rsquo;re genuinely interested.</p>
+        <p class="text-base md:text-lg leading-8 text-ln-brown/80 max-w-xl mx-auto mt-5 reveal delay-2 font-medium">The
+          real focus is deal
+          flow, operator playbooks, ground-level research, field scripts, acquisition frameworks &mdash; and, most
+          importantly, a network of people actually closing transactions.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div class="bg-ln-light-tan/40 p-8 border border-ln-brown/10 reveal">
+          <h3 class="text-ln-tan text-lg serif-font mb-2">01</h3>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ln-brown mb-2">The Feed</h4>
+          <p class="text-sm md:text-base leading-7 text-ln-brown/75">Breaking News, time sensitive opportunities, off
+            market
+            deals, important signals like market move &mdash; straight to your screen. We vet brokers up front &mdash;
+            we remove the social media noise for our operators who are actually growing or closing.</p>
+        </div>
+        <div class="bg-ln-light-tan/40 p-8 border border-ln-brown/10 reveal delay-1">
+          <h3 class="text-ln-tan text-lg serif-font mb-2">02</h3>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ln-brown mb-2">The Playbooks</h4>
+          <p class="text-sm md:text-base leading-7 text-ln-brown/75">Access to our growing library of flagship e-books
+            and
+            template libraries covering: how to value raw land (the Four Avatars framework), water rights 101, due
+            diligence checklists, creative acquisition strategies, exit playbooks and more.</p>
+        </div>
+        <div class="bg-ln-light-tan/40 p-8 border border-ln-brown/10 reveal delay-2">
+          <h3 class="text-ln-tan text-lg serif-font mb-2">03</h3>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ln-brown mb-2">The Community</h4>
+          <p class="text-sm md:text-base leading-7 text-ln-brown/75">Private Discord with channels for deal flow, water
+            law,
+            pitch nights, JV matching and more. Everyone paid to be there. No tire-kickers. No spam.</p>
+        </div>
+        <div class="bg-ln-light-tan/40 p-8 border border-ln-brown/10 reveal delay-3">
+          <h3 class="text-ln-tan text-lg serif-font mb-2">04</h3>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ln-brown mb-2">Expert Access</h4>
+          <p class="text-sm md:text-base leading-7 text-ln-brown/75">Monthly livestreams and roundtables with land
+            attorneys,
+            hydrologists, operators in the field building their dreams right now! Ask questions. Get answers. Accomplish
+            your dreams.</p>
+        </div>
+      </div>
+      <!-- Explore More Button -->
+      <div class="text-center mt-12 reveal delay-4">
+        <a href="explore.html" class="inline-block bg-ln-tan text-white text-xs font-semibold uppercase tracking-[0.2em] px-10 py-4 hover:bg-ln-dark-tan transition-all duration-300 shadow-md">
+          Explore More!
+        </a>
+      </div>
+    </section>
+
+    <!-- Section 3B: Embedded Quiz Section -->
+    <section class="py-24 px-6 md:px-20 bg-white overflow-hidden border-t border-ln-brown/10" id="quiz-section" data-nav="light">
+      <div class="max-w-3xl mx-auto bg-ln-cream/30 border border-ln-brown/10 p-8 md:p-12 relative shadow-lg">
+        <h2 class="text-3xl serif-font text-center mb-2 text-ln-brown font-bold">Member Screening Quiz</h2>
+        <p class="text-sm text-ln-brown/70 text-center mb-8">Determine your segment and unlock custom access materials.</p>
+        <div id="inline-quiz-container">
+          <!-- Quiz elements will load dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <footer class="ln-footer" data-nav="dark">
+      <div class="ln-footer-inner">
+        <div class="ln-footer-left">
+          <ul class="ln-footer-nav">
+            <li><a href="/#membership">Start</a></li>
+            <li><a href="#what-you-get">What You Get</a></li>
+            <li><a href="#" onclick="openQuizPopup(); return false;">Screening Quiz</a></li>
+            <li><a href="#" onclick="openChat(); return false;">Ask our Representative</a></li>
+            <li><a href="mailto:foreignaffairsllc2017@gmail.com">Contact</a></li>
+          </ul>
+          <!-- Newsletter signup -->
+          <div class="ln-newsletter">
+            <div class="ln-newsletter-inner">
+              <p>Stay in the loop</p>
+              <form class="ln-newsletter-form" id="newsletter-form" novalidate>
+                <input type="email" id="newsletter-email" placeholder="your@email.com" autocomplete="email" required />
+                <button type="submit" id="newsletter-submit">Subscribe</button>
+              </form>
+              <p id="newsletter-msg"></p>
+            </div>
+          </div>
+        </div>
+        <div class="ln-footer-right">
+          <div></div>
+          <div class="ln-footer-email">
+            <a href="mailto:foreignaffairsllc2017@gmail.com" aria-label="Email">
+              <svg fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                <path
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+          <div class="ln-footer-legal">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="cookie-policy.html">Cookie Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="mailto:foreignaffairsllc2017@gmail.com">Contact</a>
+            <a href="mailto:foreignaffairsllc2017@gmail.com">Support</a>
+            <span class="ln-footer-attr">&copy; 2026 LandNow.</span>
+          </div>
+        </div>
+      </div>
+      <div class="ln-footer-wordmark">
+        <h2>LANDNOW</h2>
+      </div>
+    </footer>
+
+    <!-- Floating Trigger Button -->
+    <button id="lead-trigger" aria-label="Take A Quiz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="15" rx="2" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <path d="M9 14l2 2 4-4" />
+      </svg>
+      <span class="lt-text-full">Take A Quiz</span>
+      <span class="lt-text-short">Quiz</span>
+    </button>
+
+    <!-- Lead Capture Popup -->
+    <div id="lead-popup-overlay" role="dialog" aria-modal="true" aria-label="Stay in the Loop">
+      <div id="lead-popup">
+        <button id="lead-popup-close" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="lp-inner">
+
+          <!-- Left Column: Visual Showcase -->
+          <div class="lp-visual">
+            <div class="lp-mockup-wrapper" style="display: flex; align-items: center; justify-content: center; background: rgba(61, 55, 46, 0.05); border-radius: 8px; padding: 20px; aspect-ratio: 3/4;">
+              <span style="font-size: 80px;">📋</span>
+            </div>
+            <div class="lp-visual-text">
+              <span class="lp-visual-badge">Stay in the Loop</span>
+              <p class="lp-visual-desc">Get notified about new land and water opportunities, offers, and industry updates.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Column: Content & Form -->
+          <div class="lp-content">
+            <p class="lp-desc">Not ready for full community access yet? Stay in the loop with updates on land and water opportunities, exclusive offers, and industry insights delivered straight to your inbox.</p>
+
+            <form id="lead-popup-form" novalidate>
+              <div class="lp-field">
+                <label for="lp-name">Full Name</label>
+                <input type="text" id="lp-name" placeholder="Your full name" autocomplete="name" required />
+              </div>
+              <div class="lp-field">
+                <label for="lp-email">Email Address</label>
+                <input type="email" id="lp-email" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+              <div class="lp-field">
+                <label for="lp-phone">Phone Number</label>
+                <input type="tel" id="lp-phone" placeholder="+1 (555) 000-0000" autocomplete="tel" required />
+              </div>
+
+              <button type="submit" class="lp-submit lp-submit-sample">Stay in the Loop</button>
+              <button type="button" id="lp-gold-access" class="lp-submit lp-submit-gold">FULL ACCESS NOW</button>
+
+              <div class="lp-micro-container">
+                <span class="lp-micro-item">🔒 We will NEVER sell your information</span>
+              </div>
+
+              <div class="lp-msg" id="lp-msg"></div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="cookie-banner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-auto max-w-[90vw] hidden">
+      <div class="backdrop-blur-xl text-white px-6 py-4 flex flex-col sm:flex-row items-center gap-4 shadow-2xl"
+        style="background: rgba(8, 18, 15, 0.9); border: 1px solid rgba(199, 163, 122, 0.15);">
+        <span class="text-[10px] text-center sm:text-left leading-relaxed" style="color: rgba(199, 163, 122, 0.6);">This
+          site uses functional cookies only. By continuing, you accept our <a href="privacy.html" class="underline"
+            style="color: rgba(199, 163, 122, 0.8);">Privacy Policy</a> and <a href="cookie-policy.html"
+            class="underline" style="color: rgba(199, 163, 122, 0.8);">Cookie Policy</a>.</span>
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button id="cookie-reject" class="px-4 py-1.5 text-[10px] font-bold"
+            style="background: transparent; color: rgba(199, 163, 122, 0.6); border: 1px solid rgba(199, 163, 122, 0.2);">Reject</button>
+          <button id="cookie-accept" class="px-4 py-1.5 text-[10px] font-bold"
+            style="background: #C7A37A; color: #08120F;">Accept</button>
+        </div>
+      </div>
+    </div>
+
+  <script>
+      (function () {
+        // Cookie consent
+        var cookieConsent = localStorage.getItem('ln_cookie_consent');
+        if (!cookieConsent) {
+          var banner = document.getElementById('cookie-banner');
+          if (banner) banner.classList.remove('hidden');
+        }
+        document.getElementById('cookie-accept')?.addEventListener('click', function () {
+          localStorage.setItem('ln_cookie_consent', 'accepted');
+          document.getElementById('cookie-banner').classList.add('hidden');
+        });
+        document.getElementById('cookie-reject')?.addEventListener('click', function () {
+          localStorage.setItem('ln_cookie_consent', 'rejected');
+          document.getElementById('cookie-banner').classList.add('hidden');
+        });
+      })();
+
+    (function () {
+      function initConfig() {
+        fetch('/api/submit-entry')
+          .then(function (r) { return r.json(); })
+          .then(function (config) {
+            window.__whopLink = config.whopLink || null;
+          })
+          .catch(function () { });
+      }
+
+      function initReveal() {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) entry.target.classList.add('is-visible');
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) { observer.observe(el); });
+      }
+
+      initReveal();
+      initConfig();
+    })();
+
+    (function () {
+      const form = document.getElementById('entry-form');
+      const submitBtn = document.getElementById('entry-submit');
+      const result = document.getElementById('entry-result');
+
+      // Wizard elements
+      const steps = document.querySelectorAll('.wizard-step');
+      const prevBtn = document.getElementById('wizard-prev');
+      const nextBtn = document.getElementById('wizard-next');
+      const progressBar = document.getElementById('wizard-progress-bar');
+      const stepTitle = document.getElementById('wizard-step-title');
+      const stepPercent = document.getElementById('wizard-step-percent');
+
+      const radioPayment = document.querySelector('input[value="payment"]');
+      const radioBarter = document.querySelector('input[value="barter"]');
+      const cardPayment = document.getElementById('card-admission-payment');
+      const cardBarter = document.getElementById('card-admission-barter');
+      const barterDetail = document.getElementById('barter-detail-container');
+      const barterInput = document.getElementById('entry-barter-contribution');
+
+      // Dynamic Sorting Wizard Selectors
+      const cardProfileInvestor = document.getElementById('card-profile-investor');
+      const cardProfileOwner = document.getElementById('card-profile-owner');
+      const cardProfileKicker = document.getElementById('card-profile-kicker');
+
+      const profilingInvestorFields = document.getElementById('profiling-investor-fields');
+      const profilingOwnerFields = document.getElementById('profiling-owner-fields');
+      const profilingKickerFields = document.getElementById('profiling-kicker-fields');
+
+      const experienceSelect = document.getElementById('entry-experience');
+      const investmentSelect = document.getElementById('entry-investment');
+      const companyInvestorInput = document.getElementById('entry-company-investor');
+      const assetDetailsInput = document.getElementById('entry-asset-details');
+      const companyOwnerInput = document.getElementById('entry-company-owner');
+
+      let selectedProfile = null;
+      let currentStep = 1;
+      const totalSteps = 4;
+
+      function getEffectiveSteps() {
+        if (selectedProfile === 'tire-kicker') {
+          return [1, 2, 4];
+        }
+        return [1, 2, 3, 4];
+      }
+
+      function selectProfile(profile) {
+        selectedProfile = profile;
+        const radios = document.getElementsByName('user-profile');
+        radios.forEach(r => {
+          r.checked = (r.value === profile);
+        });
+
+        // Set card styling
+        if (cardProfileInvestor) {
+          cardProfileInvestor.className = profile === 'cash-investor'
+            ? "relative flex flex-col p-4 bg-white border-2 border-ln-tan rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group"
+            : "relative flex flex-col p-4 bg-white/40 border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white/80 transition-all shadow-sm group";
+        }
+        if (cardProfileOwner) {
+          cardProfileOwner.className = profile === 'asset-owner'
+            ? "relative flex flex-col p-4 bg-white border-2 border-ln-tan rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group"
+            : "relative flex flex-col p-4 bg-white/40 border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white/80 transition-all shadow-sm group";
+        }
+        if (cardProfileKicker) {
+          cardProfileKicker.className = profile === 'tire-kicker'
+            ? "relative flex flex-col p-4 bg-white border-2 border-ln-tan rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group"
+            : "relative flex flex-col p-4 bg-white/40 border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white/80 transition-all shadow-sm group";
+        }
+      }
+
+      if (cardProfileInvestor) cardProfileInvestor.addEventListener('click', () => selectProfile('cash-investor'));
+      if (cardProfileOwner) cardProfileOwner.addEventListener('click', () => selectProfile('asset-owner'));
+      if (cardProfileKicker) cardProfileKicker.addEventListener('click', () => selectProfile('tire-kicker'));
+
+      function updateWizard() {
+        steps.forEach(step => {
+          const stepNum = parseInt(step.getAttribute('data-step'));
+          if (stepNum === currentStep) {
+            step.classList.remove('hidden');
+          } else {
+            step.classList.add('hidden');
+          }
+        });
+
+        // Show/hide profile-specific fields in Step 2
+        if (currentStep === 2) {
+          if (profilingInvestorFields) profilingInvestorFields.classList.add('hidden');
+          if (profilingOwnerFields) profilingOwnerFields.classList.add('hidden');
+          if (profilingKickerFields) profilingKickerFields.classList.add('hidden');
+
+          if (selectedProfile === 'cash-investor' && profilingInvestorFields) {
+            profilingInvestorFields.classList.remove('hidden');
+          } else if (selectedProfile === 'asset-owner' && profilingOwnerFields) {
+            profilingOwnerFields.classList.remove('hidden');
+          } else if (selectedProfile === 'tire-kicker' && profilingKickerFields) {
+            profilingKickerFields.classList.remove('hidden');
+          }
+        }
+
+        // Calculate progress percentage and step indicator dynamically based on active profile
+        const effectiveSteps = getEffectiveSteps();
+        const currentIndex = effectiveSteps.indexOf(currentStep);
+        const activeStepsCount = effectiveSteps.length;
+        
+        const percent = Math.round((currentIndex / (activeStepsCount - 1)) * 100) || 0;
+        progressBar.style.width = percent + '%';
+        
+        // Custom titles
+        let stepText = `Step ${currentIndex + 1} of ${activeStepsCount}: `;
+        if (currentStep === 1) {
+          stepTitle.textContent = stepText + "Profile Selection";
+        } else if (currentStep === 2) {
+          stepTitle.textContent = stepText + (selectedProfile === 'tire-kicker' ? "Notice" : "Target Profile");
+        } else if (currentStep === 3) {
+          stepTitle.textContent = stepText + "Admission Preference";
+        } else if (currentStep === 4) {
+          stepTitle.textContent = stepText + "Contact & Referral";
+        }
+        stepPercent.textContent = percent + '% Complete';
+
+        // Update buttons
+        if (currentStep === 1) {
+          prevBtn.classList.add('hidden');
+          nextBtn.classList.remove('hidden');
+          nextBtn.className = "w-full bg-ln-brown text-white py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-ln-dark-tan transition-all";
+          submitBtn.classList.add('hidden');
+        } else if (currentStep === 4) {
+          prevBtn.classList.remove('hidden');
+          prevBtn.className = "w-1/3 border border-ln-brown/25 text-ln-brown py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-white transition-all";
+          nextBtn.classList.add('hidden');
+          submitBtn.classList.remove('hidden');
+          submitBtn.className = "w-2/3 bg-ln-brown text-white py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-ln-dark-tan transition-all";
+        } else {
+          prevBtn.classList.remove('hidden');
+          prevBtn.className = "w-1/3 border border-ln-brown/25 text-ln-brown py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-white transition-all";
+          nextBtn.classList.remove('hidden');
+          nextBtn.className = "w-2/3 bg-ln-brown text-white py-4 text-[11px] md:text-sm uppercase tracking-[0.2em] font-medium hover:bg-ln-dark-tan transition-all";
+          submitBtn.classList.add('hidden');
+        }
+      }
+
+      // Check fields validation for current step
+      function validateStep(step) {
+        if (step === 1) {
+          if (!selectedProfile) {
+            alert('Please select a profile to continue.');
+            return false;
+          }
+        } else if (step === 2) {
+          if (selectedProfile === 'cash-investor') {
+            if (!experienceSelect.value) {
+              experienceSelect.focus();
+              return false;
+            }
+            if (!investmentSelect.value) {
+              investmentSelect.focus();
+              return false;
+            }
+          } else if (selectedProfile === 'asset-owner') {
+            if (!assetDetailsInput.value.trim()) {
+              assetDetailsInput.focus();
+              return false;
+            }
+          }
+        } else if (step === 3) {
+          if (selectedProfile !== 'tire-kicker' && radioBarter.checked) {
+            const barterVal = barterInput.value.trim();
+            if (!barterVal) {
+              barterInput.focus();
+              return false;
+            }
+          }
+        } else if (step === 4) {
+          const name = document.getElementById('entry-name');
+          const email = document.getElementById('entry-email');
+          if (!name.value.trim()) {
+            name.focus();
+            return false;
+          }
+          if (!email.value.trim() || !email.validity.valid) {
+            email.focus();
+            return false;
+          }
+        }
+        return true;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+          if (currentStep === 2 && selectedProfile === 'tire-kicker') {
+            currentStep = 4;
+          } else if (currentStep < 4) {
+            currentStep++;
+          }
+          updateWizard();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStep === 4 && selectedProfile === 'tire-kicker') {
+          currentStep = 2;
+        } else if (currentStep > 1) {
+          currentStep--;
+        }
+        updateWizard();
+      });
+
+      // Handle admission radio cards
+      function setAdmissionSelection(type) {
+        if (type === 'payment') {
+          radioPayment.checked = true;
+          radioBarter.checked = false;
+          cardPayment.className = "relative flex flex-col p-4 bg-white border-2 border-ln-tan rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group";
+          cardBarter.className = "relative flex flex-col p-4 bg-white/40 border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white/80 transition-all shadow-sm group";
+
+          barterDetail.classList.add('hidden');
+          barterDetail.style.maxHeight = '0';
+          barterInput.removeAttribute('required');
+        } else {
+          radioPayment.checked = false;
+          radioBarter.checked = true;
+          cardPayment.className = "relative flex flex-col p-4 bg-white/40 border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white/80 transition-all shadow-sm group";
+          cardBarter.className = "relative flex flex-col p-4 bg-white border-2 border-ln-tan rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group";
+
+          barterDetail.classList.remove('hidden');
+          barterDetail.style.maxHeight = '200px';
+          barterInput.setAttribute('required', 'required');
+        }
+      }
+
+      if (cardPayment && cardBarter) {
+        cardPayment.addEventListener('click', () => setAdmissionSelection('payment'));
+        cardBarter.addEventListener('click', () => setAdmissionSelection('barter'));
+      }
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (!validateStep(currentStep)) return;
+
+          submitBtn.disabled = true;
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = 'Submitting...';
+          result.classList.add('hidden');
+
+          const admissionType = selectedProfile === 'tire-kicker' ? 'free-pipeline' : (radioPayment.checked ? 'payment' : 'barter');
+          const barterContribution = admissionType === 'barter' ? barterInput.value.trim() : '';
+
+          const payload = {
+            name: document.getElementById('entry-name').value.trim(),
+            email: document.getElementById('entry-email').value.trim(),
+            phone: document.getElementById('entry-phone').value.trim(),
+            location: document.getElementById('entry-location').value.trim(),
+            company: selectedProfile === 'cash-investor' ? companyInvestorInput.value.trim() : (selectedProfile === 'asset-owner' ? companyOwnerInput.value.trim() : ''),
+            experience: selectedProfile === 'cash-investor' ? experienceSelect.value : '',
+            investmentRange: selectedProfile === 'cash-investor' ? investmentSelect.value : '',
+            referral: document.getElementById('entry-referral').value.trim(),
+            socialMedia: document.getElementById('entry-social')?.value || '',
+            handle: document.getElementById('entry-handle').value.trim(),
+            message: '',
+            admissionType: admissionType,
+            barterContribution: barterContribution,
+            funnelCategory: {
+              'cash-investor': 'Cash Investor',
+              'asset-owner': 'Asset Owner',
+              'tire-kicker': 'Tire Kicker'
+            }[selectedProfile] || '',
+            assetDetails: selectedProfile === 'asset-owner' ? assetDetailsInput.value.trim() : ''
+          };
+
+          try {
+            sessionStorage.setItem('ln_applicant_name', payload.name);
+            sessionStorage.setItem('ln_applicant_email', payload.email);
+            sessionStorage.setItem('ln_applicant_experience', payload.experience || '');
+
+            const res = await fetch('/api/submit-entry', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.success) {
+              const savedProfile = payload.funnelCategory;
+              const savedAdmission = payload.admissionType;
+
+              form.reset();
+              currentStep = 1;
+              selectedProfile = null;
+              updateWizard();
+              setAdmissionSelection('payment');
+
+              // Reset card styles
+              if (cardProfileInvestor) cardProfileInvestor.className = "relative flex flex-col p-4 bg-white border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group";
+              if (cardProfileOwner) cardProfileOwner.className = "relative flex flex-col p-4 bg-white border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group";
+              if (cardProfileKicker) cardProfileKicker.className = "relative flex flex-col p-4 bg-white border border-ln-brown/20 rounded-lg cursor-pointer hover:bg-white transition-all shadow-sm group";
+
+              if (savedProfile === 'Tire Kicker') {
+                result.className = 'text-center text-xs mt-4 text-green-700 font-semibold';
+                result.textContent = 'Application received! You will receive your free guide sample in your email shortly.';
+                result.classList.remove('hidden');
+              } else if (savedAdmission === 'payment') {
+                result.className = 'text-center text-xs mt-4 text-green-700';
+                result.textContent = 'Application received. Redirecting to complete payment and onboarding.';
+                result.classList.remove('hidden');
+                var redirectTarget = window.__whopLink || '/api/go';
+                showSuccessModal(redirectTarget);
+              } else {
+                showSuccessModal(null);
+              }
+            } else {
+              result.className = 'text-center text-xs mt-4 text-red-600';
+              result.textContent = data.error || 'Something went wrong. Please try again.';
+              result.classList.remove('hidden');
+            }
+          } catch (err) {
+            result.className = 'text-center text-xs mt-4 text-red-600';
+            result.textContent = 'Network error. Please check your connection and try again.';
+            result.classList.remove('hidden');
+          }
+
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        });
+      }
+    })();
+
+    function showSuccessModal(redirectTarget) {
+      var modal = document.getElementById('success-modal');
+      var countdown = document.getElementById('success-modal-countdown');
+      var continueBtn = document.getElementById('success-modal-continue');
+      var messageEl = document.getElementById('success-modal-message');
+
+      if (redirectTarget) {
+        if (messageEl) messageEl.textContent = 'You\u2019re all set to continue to payment and complete your onboarding for the network.';
+        if (continueBtn) {
+          continueBtn.textContent = 'Continue to Payment';
+          continueBtn.onclick = function () { window.location.href = redirectTarget; };
+          continueBtn.classList.remove('hidden');
+        }
+        if (countdown) {
+          countdown.parentElement.classList.remove('hidden');
+          var remaining = 4;
+          var tick = function () {
+            countdown.textContent = String(remaining);
+            if (remaining <= 0) { window.location.href = redirectTarget; return; }
+            remaining -= 1;
+            setTimeout(tick, 1000);
+          };
+          tick();
+        }
+      } else {
+        if (messageEl) messageEl.textContent = 'Thank you! Your barter proposal has been recorded and is under review. Our team will contact you if your contribution is approved.';
+        if (continueBtn) {
+          continueBtn.textContent = 'Close';
+          continueBtn.onclick = function () { modal.classList.add('hidden'); modal.classList.remove('flex'); };
+          continueBtn.classList.remove('hidden');
+        }
+        if (countdown) countdown.parentElement.classList.add('hidden');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+  </script>
+
+  <script>
+    // Lead Capture Popup
+    (function () {
+      var overlay = document.getElementById('lead-popup-overlay');
+      var closeBtn = document.getElementById('lead-popup-close');
+      var trigger = document.getElementById('lead-trigger');
+      var form = document.getElementById('lead-popup-form');
+      var msg = document.getElementById('lp-msg');
+      var shown = false;
+      var dismissKey = 'ln_popup_dismissed';
+
+      function canShow() {
+        var dismissed = localStorage.getItem(dismissKey);
+        if (!dismissed) return true;
+        var elapsed = Date.now() - parseInt(dismissed, 10);
+        return elapsed > 30 * 24 * 60 * 60 * 1000;
+      }
+
+      function showPopup(force) {
+        if (!overlay) return;
+        if (!force && shown) return;
+        if (!force && !canShow()) return;
+        shown = true;
+        setTimeout(function () {
+          overlay.classList.add('active');
+        }, 300);
+      }
+
+      function closePopup() {
+        if (!overlay) return;
+        overlay.classList.remove('active');
+        localStorage.setItem(dismissKey, String(Date.now()));
+      }
+
+      if (trigger) {
+        trigger.addEventListener('click', function () {
+          localStorage.removeItem(dismissKey);
+          showPopup(true);
+        });
+      }
+
+      window.showLeadPopup = function (force) {
+        showPopup(force);
+      };
+
+      if (closeBtn) closeBtn.addEventListener('click', closePopup);
+      var goldAccessBtn = document.getElementById('lp-gold-access');
+      if (goldAccessBtn) {
+        goldAccessBtn.addEventListener('click', function () {
+          window.location.href = window.__whopLink || '/api/go';
+        });
+      }
+
+      if (form) {
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          var name = document.getElementById('lp-name').value.trim();
+          var email = document.getElementById('lp-email').value.trim();
+          var phone = document.getElementById('lp-phone').value.trim();
+
+          if (!name || !email || !phone) {
+            msg.style.color = '#b91c1c';
+            msg.textContent = 'Please complete all fields.';
+            return;
+          }
+
+          var submitBtn = form.querySelector('.lp-submit');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+          msg.textContent = '';
+
+          try {
+            var res = await fetch('/api/lead-capture', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: name, email: email, phone: phone, leadSource: 'lead-popup' })
+            });
+            var data = await res.json();
+            if (data.success) {
+              msg.style.color = '#4d7c0f';
+              msg.textContent = 'You\'re in the loop! Check your inbox for updates.';
+              localStorage.setItem(dismissKey, String(Date.now()));
+              setTimeout(closePopup, 2000);
+            } else {
+              throw new Error(data.error || 'Submission failed');
+            }
+          } catch (err) {
+            msg.style.color = '#b91c1c';
+            msg.textContent = 'Could not process your request — please try again.';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Stay in the Loop';
+          }
+        });
+      }
+    })();
+
+    // Footer Newsletter
+    (function () {
+      var form = document.getElementById('newsletter-form');
+      var msgEl = document.getElementById('newsletter-msg');
+
+      if (form) {
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          var email = document.getElementById('newsletter-email').value.trim();
+          if (!email || !email.includes('@')) {
+            msgEl.style.color = 'rgba(185,28,28,0.8)';
+            msgEl.textContent = 'Enter a valid email.';
+            return;
+          }
+          var btn = document.getElementById('newsletter-submit');
+          btn.disabled = true;
+          btn.textContent = '...';
+          msgEl.textContent = '';
+          try {
+            await fetch('/api/lead-capture', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email, leadSource: 'newsletter-footer' })
+            });
+            msgEl.style.color = 'rgba(199,163,122,0.8)';
+            msgEl.textContent = 'You\'re subscribed!';
+            form.reset();
+          } catch {
+            msgEl.style.color = 'rgba(185,28,28,0.8)';
+            msgEl.textContent = 'Error — please try again.';
+            btn.disabled = false;
+            btn.textContent = 'Subscribe';
+          }
+        });
+      }
+    })();
+  </script>
+  <div id="success-modal" class="fixed inset-0 z-[1200] hidden items-center justify-center bg-black/70 px-4">
+    <div class="w-full max-w-md rounded-2xl border border-white/15 bg-[#f7efe2] p-8 text-center shadow-2xl">
+      <p class="text-[10px] uppercase tracking-[0.25em] text-ln-brown/60">Application received</p>
+      <h3 class="mt-3 text-2xl font-semibold text-ln-brown serif-font">You&apos;re in.</h3>
+      <p id="success-modal-message" class="mt-3 text-sm leading-6 text-ln-brown/70">You&apos;re all set to continue to payment and complete your
+        onboarding for the network.</p>
+      <button id="success-modal-continue"
+        class="mt-6 inline-flex items-center justify-center rounded-full bg-ln-brown px-6 py-3 text-sm font-medium text-white transition hover:bg-ln-tan hover:text-ln-brown">Continue
+        to Payment</button>
+      <p class="mt-4 text-[11px] uppercase tracking-[0.2em] text-ln-brown/60">Redirecting in <span
+          id="success-modal-countdown">4</span> seconds</p>
+    </div>
+  </div>
+  <!-- Provisional Contract Modal -->
+  <div id="provisional-contract-modal" class="fixed inset-0 z-[3000] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-[#fcfaf7] border border-ln-tan/40 max-w-2xl w-full p-6 md:p-8 rounded-lg shadow-2xl space-y-5 relative max-h-[90vh] overflow-y-auto">
+      <button type="button" id="close-contract-modal" class="absolute top-4 right-4 text-ln-brown/60 hover:text-ln-brown text-2xl font-bold border-0 bg-transparent cursor-pointer">&times;</button>
+      <div class="border-b border-ln-tan/30 pb-3">
+        <span class="text-[10px] uppercase tracking-[0.25em] font-bold text-ln-tan block mb-1">PROVISIONAL AGREEMENT</span>
+        <h3 class="text-xl md:text-2xl font-bold text-ln-brown serif-font">Provisional Access &amp; Asset Rights Terms</h3>
+      </div>
+      
+      <div>
+        <label for="modal-email" class="text-[11px] uppercase tracking-[0.18em] font-bold text-ln-brown/80 block mb-1.5">Enter Your Email Address</label>
+        <input type="email" id="modal-email" required placeholder="you@example.com" class="w-full bg-white border border-ln-tan/40 px-4 py-3 text-sm text-ln-brown outline-none focus:border-ln-brown transition-colors rounded" />
+      </div>
+
+      <div class="text-xs md:text-sm text-ln-brown/80 space-y-3 leading-relaxed bg-white/60 p-4 border border-ln-brown/10 rounded font-mono overflow-y-auto max-h-52">
+        <p><strong>1. INTENT &amp; CAPACITY:</strong> By executing this one-click agreement, the undersigned ("Signatory") confirms an intent to evaluate physical land acquisitions, senior water rights frameworks, and private deal flow within the LandNow network.</p>
+        <p><strong>2. CONFIDENTIALITY:</strong> Proprietary prior-appropriation research, basin intelligence, and off-market operator disclosures provided via LandNow remain strictly confidential and bound to the Signatory's registered email (<span id="contract-display-email" class="underline font-bold text-ln-brown">your email</span>).</p>
+        <p><strong>3. PROVISIONAL STATUS:</strong> Submission of this provisional acceptance reserves priority access to deal flow and verification records pending final partner review.</p>
+        <p><strong>4. DOMAIN STAMP:</strong> Executed for origin domain: <span id="contract-display-domain" class="font-bold text-ln-tan"></span></p>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-1">
+        <div class="text-[11px] text-ln-brown/60">
+          Clicking Accept records your timestamped digital signature.
+        </div>
+        <button type="button" id="accept-contract-btn" class="w-full sm:w-auto bg-ln-tan text-ln-brown px-8 py-3.5 text-sm uppercase tracking-[0.2em] font-bold hover:bg-ln-dark-tan transition-all shadow-md border-0 cursor-pointer">
+          ACCEPT &amp; SIGN CONTRACT
+        </button>
+      </div>
+      <div id="contract-status-msg" class="text-xs text-center font-bold hidden py-1"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var heroAccessBtn = document.getElementById('hero-access-btn');
+      var contractModal = document.getElementById('provisional-contract-modal');
+      var closeModalBtn = document.getElementById('close-contract-modal');
+      var acceptBtn = document.getElementById('accept-contract-btn');
+      var modalEmailInput = document.getElementById('modal-email');
+      var displayEmail = document.getElementById('contract-display-email');
+      var displayDomain = document.getElementById('contract-display-domain');
+      var statusMsg = document.getElementById('contract-status-msg');
+
+      if (heroAccessBtn && contractModal) {
+        heroAccessBtn.addEventListener('click', function () {
+          if (displayDomain) displayDomain.textContent = window.location.hostname || 'landnow.com';
+          if (statusMsg) {
+            statusMsg.classList.add('hidden');
+            statusMsg.textContent = '';
+          }
+          contractModal.classList.remove('hidden');
+          if (modalEmailInput) modalEmailInput.focus();
+        });
+      }
+
+      if (modalEmailInput && displayEmail) {
+        modalEmailInput.addEventListener('input', function () {
+          displayEmail.textContent = modalEmailInput.value.trim() || 'your email';
+        });
+      }
+
+      if (closeModalBtn && contractModal) {
+        closeModalBtn.addEventListener('click', function () {
+          contractModal.classList.add('hidden');
+        });
+      }
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', async function () {
+          var email = modalEmailInput ? modalEmailInput.value.trim() : '';
+          if (!email || !email.includes('@')) {
+            alert('Please enter a valid email address.');
+            if (modalEmailInput) modalEmailInput.focus();
+            return;
+          }
+
+          acceptBtn.disabled = true;
+          acceptBtn.textContent = 'ACCEPTING & WRITING...';
+
+          var payload = {
+            email: email,
+            domain: window.location.hostname || 'landnow.com',
+            timestamp: new Date().toISOString(),
+            accepted: true
+          };
+
+          try {
+            var res = await fetch('/api/submit-entry', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            var data = await res.json();
+            if (res.ok && data.success) {
+              if (statusMsg) {
+                statusMsg.className = 'text-xs text-center font-bold text-emerald-700 py-1 block';
+                statusMsg.textContent = 'Contract Accepted! Saved to domain spreadsheet tab.';
+              }
+              setTimeout(function () {
+                if (contractModal) contractModal.classList.add('hidden');
+                window.location.href = '/confirmation.html?email=' + encodeURIComponent(email);
+              }, 1200);
+            } else {
+              throw new Error(data.error || 'Failed to record acceptance.');
+            }
+          } catch (err) {
+            if (statusMsg) {
+              statusMsg.className = 'text-xs text-center font-bold text-red-600 py-1 block';
+              statusMsg.textContent = 'Error: ' + (err.message || 'Submission failed. Please try again.');
+            }
+            acceptBtn.disabled = false;
+            acceptBtn.textContent = 'ACCEPT & SIGN CONTRACT';
+          }
+        });
+      }
+    })();
+  </script>
+  <script src="landnow-chat-widget.js" defer></script>
+</body>
+
+</html>

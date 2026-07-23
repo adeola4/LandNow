@@ -1,0 +1,81 @@
+LandNow Quiz — AI Optimization Context
+
+SOURCE OF TRUTH
+- Repo: https://github.com/isiraglobal/LandNow-TAN
+- Quiz file: /quiz/index.html
+- Sheets: Entries sheet already exists at SHEET_ID=1jYiAaAgi5FO0revNHVj-mVBzRA7ach8YzaAkaPRTjIM
+- Submit endpoint: POST /api/submit-entry
+
+1) WHAT THIS IS
+This quiz is a 3-layer binary decision tree used as a lead magnet before the membership application. Its ONLY job is to segment visitors and capture their email. It is NOT a survey.
+
+2) CURRENT QUIZ SHAPE
+- Cover: "Which LandNow prospect are you?" + Start button
+- Layer 1: 1 question, 2 options
+- Layer 2: both branches each have 1 question, 2 options = 4 leaf paths
+- Layer 3: all 4 paths converge to 1 result decision = 4 final segments
+- Email gate: AFTER Layer 2, BEFORE Layer 3
+- Progress indicator: simple step counter
+
+3) 4 SEGMENTS + OUTPUT FIELDS
+Each leaf path must map 1:1 to exactly one segment. Output goes to Google Sheet "Entries" via /api/submit-entry as FunnelCategory plus all quiz answers.
+
+Segments:
+A) The Operator — wants active deal flow, already acquires land/water.
+B) The Strategist — wants frameworks, in deal-analysis mode, not yet deploying capital.
+C) The Buyer — has capital, no operator network, needs deal flow + vetting.
+D) The Tire Kicker — wrong audience (passive residential, no real assets, no liquid capital).
+
+For landing page / CTA:
+- A: "Join active acquisitions" → membership form + case study PDF
+- B: "Start with the frameworks" → free checklist / low ticket
+- C: "See member deals" → waitlist → consult
+- D: Soft redirect to public ebook download (not membership)
+
+4) ANALYTICS SHEETS (must exist)
+Create a new sheet named QuizAnalytics with these columns:
+step, question_id, option_key, option_text, views, clicks, completion_rate, drop_off_count, last_10_conversions, avg_path_to_segment, sample_size, updated_at
+
+Add sheet hookup in google-script/Code.js under SHEET_CONFIG so /api/submit-entry or a lightweight endpoint can write to it.
+
+5) ADAPTATION RULES — EVERY 10 SUBMISSIONS
+Rule A: Find the lowest completion_rate leaf path. Draft ONE new question/option variant for the highest-drop-off step in that path only.
+
+Rule B: Keep the same intent. Do not change the question topic. Change format, wording, or add one more relevant option if currently binary.
+
+Rule C: AB test mode: wrap the variant in a feature flag or URL param "variant=X". 50/50 split via sheet column or client-side random. Do not deploy winner until conversions lift and sample_size >= 30.
+
+Rule D: After adopting a winner, immediately archive the losing variant in a sheet named QuizVersionHistory with columns: version, active, replaced_by, replaced_at, reason. Do not delete old variants — keep the tree history.
+
+Rule E: Cap total variants at 3x current node count. If Layer 1 has 4 variants, max slots = 12. Hard stop when full.
+
+Rule F: If no leaf path has Completion Rate < 35%, do NOT change anything. Changing running winners kills conversion.
+
+6) HARD CONSTRAINTS
+- Never change the email gate placement.
+- Never add more than 3 layers.
+- Never remove a segment once defined.
+- Membership application form stays untouched; only quiz quiz/index.html changes.
+- All mutations go through the git commit flow to LandNow-TAN repo. No local-only changes.
+
+7) SUCCESS METRICS
+Primary: quiz_started → quiz_completed
+Primary: quiz_started → email_captured
+Secondary: email_captured → membership application started
+Target: >35% start-to-completion, >12% start-to-email
+
+If any metric drops for 2 consecutive 10-submission batches, immediately revert the last suspected change from QuizVersionHistory.
+
+8) WHAT THE AI AGENT RECEIVES AS CONTEXT EVERY RUN
+- Last 10 submissions from QuizAnalytics
+- QuizVersionHistory last 3 rows
+- Current quiones from /quiz/index.html
+- Success metrics for the last 3 batches
+- Hard constraints from above
+- Instruction to return exactly ONE proposed change, not multiple options.
+
+9) REPO COMMIT RULES
+- Branch naming: quiz-opt/NNN-WHAT
+- Commit message format: "A/B: Layer X — [old] → [new] | reason: [one line]"
+- Open PR, do not auto-merge. Wait for sign-off.
+

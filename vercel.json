@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "devCommand": "npx serve -p $PORT",
+  "rewrites": [
+    { "source": "/access", "destination": "/access.html" },
+    { "source": "/explore", "destination": "/explore.html" },
+    { "source": "/redirect", "destination": "/redirect.html" },
+    { "source": "/F1.UltimateGuideToLandStrategies.pdf", "destination": "/api/guide-download" }
+  ]
+}

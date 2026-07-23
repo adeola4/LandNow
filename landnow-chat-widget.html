@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LandNow Chat</title>
+  <style>
+    :root {
+      --ln-brown: #3d372e;
+      --ln-tan: #b5925a;
+      --ln-cream: #e5e0d4;
+      --ln-light-tan: #d6c9b1;
+      --ln-dark-tan: #8c7046;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: "Outfit", sans-serif; color: var(--ln-brown); background: var(--ln-cream); }
+    .ln-chat-launcher {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      z-index: 1501;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--ln-brown);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--ln-cream);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .ln-chat-launcher:hover { background: var(--ln-dark-tan); transform: translateY(-2px); }
+    .ln-chat-launcher svg { width: 26px; height: 26px; }
+    .ln-chat-panel {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 380px;
+      max-width: calc(100vw - 48px);
+      max-height: calc(100vh - 120px);
+      background: #f7efe2;
+      border: 1px solid rgba(199,163,122,0.25);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+      z-index: 1600;
+      display: none;
+      flex-direction: column;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .ln-chat-panel.open { display: flex; }
+    .ln-chat-header {
+      background: var(--ln-brown);
+      color: var(--ln-cream);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .ln-chat-header .lp { display: flex; align-items: center; gap: 10px; }
+    .ln-chat-header .lp-dot { width: 8px; height: 8px; background: #7ee787; border-radius: 50%; box-shadow: 0 0 0 3px rgba(126,231,135,0.25); }
+    .ln-chat-header .lp-title { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+    .ln-chat-header .lp-badge { font-size: 9px; opacity: 0.8; letter-spacing: 0.15em; text-transform: uppercase; }
+    .ln-chat-close { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 18px; line-height: 1; padding: 4px; }
+    .ln-chat-close:hover { color: #fff; }
+    .ln-chat-messages { padding: 16px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .ln-chat-message { background: rgba(255,255,255,0.65); border: 1px solid rgba(199,163,122,0.2); padding: 10px 12px; font-size: 13.5px; line-height: 1.55; color: var(--ln-brown); }
+    .ln-chat-message.bot { background: rgba(255,255,255,0.75); border-color: rgba(199,163,122,0.35); }
+    .ln-chat-message.user { background: var(--ln-brown); color: var(--ln-cream); border-color: transparent; align-self: flex-end; max-width: 78%; }
+    .ln-chat-message strong { color: var(--ln-dark-tan); }
+    .ln-chat-message.bot strong { color: var(--ln-dark-tan); }
+    .ln-chat-actions { padding: 12px 14px; border-top: 1px solid rgba(199,163,122,0.2); display: flex; flex-wrap: wrap; gap: 8px; }
+    .ln-chat-btn {
+      background: transparent;
+      border: 1px solid rgba(61,55,46,0.28);
+      color: var(--ln-brown);
+      padding: 9px 12px;
+      font-family: "Outfit", sans-serif;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .ln-chat-btn:hover { background: var(--ln-brown); color: var(--ln-cream); border-color: transparent; }
+    .ln-chat-cta {
+      width: 100%;
+      background: var(--ln-brown);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-family: "Outfit", sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 6px;
+    }
+    .ln-chat-cta:hover { background: var(--ln-dark-tan); }
+    .ln-chat-cta.ghost { background: transparent; color: var(--ln-brown); border: 1px dashed rgba(61,55,46,0.5); }
+    .ln-chat-later-note { font-size: 11px; color: rgba(61,55,46,0.55); line-height: 1.5; margin-top: 8px; }
+    @media (max-width: 480px) {
+      .ln-chat-launcher { bottom: 20px; left: 20px; width: 52px; height: 52px; }
+      .ln-chat-panel { left: 12px; right: 12px; width: auto; bottom: 16px; max-height: calc(100vh - 100px); }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    window.LANDNOW_CHAT_CONFIG = window.LANDNOW_CHAT_CONFIG || {};
+    window.LANDNOW_CHAT_CONFIG.whop = window.LANDNOW_CHAT_CONFIG.whop || '';
+  </script>
+  <div class="ln-chat-frame" id="ln-chat-frame">
+    <button class="ln-chat-launcher" id="ln-chat-launcher" aria-label="Open assistant">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+      </svg>
+    </button>
+
+    <aside class="ln-chat-panel" id="ln-chat-panel" role="dialog" aria-modal="true" aria-label="Assistant">
+      <div class="ln-chat-header">
+        <div class="lp">
+          <div class="lp-dot"></div>
+          <div>
+            <div class="lp-title">LandNow Concierge</div>
+            <div class="lp-badge">Private Network</div>
+          </div>
+        </div>
+        <button class="ln-chat-close" id="ln-chat-close" aria-label="Close">×</button>
+      </div>
+
+      <div class="ln-chat-messages" id="ln-chat-messages">
+        <div class="ln-chat-message bot" id="ln-msg-0">
+          Welcome to <strong>LandNow</strong>. We run a closed deal room for land and water-rights acquisitions. This will take about 2 minutes.
+        </div>
+      </div>
+
+      <div class="ln-chat-actions" id="ln-chat-actions">
+        <button class="ln-chat-btn" data-action="yes" data-next="1">I’m actively acquiring</button>
+        <button class="ln-chat-btn" data-action="exploring" data-next="1">Just exploring</button>
+        <button class="ln-chat-btn" data-action="no" data-next="no">Pass</button>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    (function() {
+      if (window.__lnChatBootstrapped) return;
+      window.__lnChatBootstrapped = true;
+
+      const panel = document.getElementById('ln-chat-panel');
+      const messages = document.getElementById('ln-chat-messages');
+      const actions = document.getElementById('ln-chat-actions');
+      const openBtn = document.getElementById('ln-chat-launcher');
+      const closeBtn = document.getElementById('ln-chat-close');
+
+      function openChat() { panel.classList.add('open'); openBtn.style.transform = 'scale(0)'; }
+      function closeChat() { panel.classList.remove('open'); openBtn.style.transform = 'scale(1)'; }
+      openBtn.addEventListener('click', openChat);
+      closeBtn.addEventListener('click', closeChat);
+
+      function addMessage(text, type, attrs) {
+        const div = document.createElement('div');
+        div.className = 'ln-chat-message ' + (type || 'bot');
+        Object.keys(attrs || {}).forEach(function(k) { div.setAttribute(k, attrs[k]); });
+        div.innerHTML = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+        return div;
+      }
+
+      function setActions(html) { actions.innerHTML = html; }
+
+      function resolveCheckoutUrl() {
+        const whop = (window.LANDNOW_CHAT_CONFIG && (window.LANDNOW_CHAT_CONFIG.whop || window.LANDNOW_WHOP || '')).trim();
+        return whop || 'payment.html';
+      }
+
+      const botMessages = {
+        '1': {
+          exploring: function() {
+            addMessage('Smart. The window for offline <strong>water-rights</strong> and land positions is narrowing. Most people wait until it is headline news.', 'bot');
+            setTimeout(function() {
+              addMessage('Inside this network you get off-market deal flow, prior-appropriation legal frameworks, and direct operator access.', 'bot');
+              setTimeout(function() {
+                addMessage('We are capped at <strong>127 active operators</strong> and opening shortly. Entry is a <strong>$297 verification</strong>, credited if you are accepted.', 'bot');
+                renderCheckout('exploring');
+              }, 350);
+            }, 350);
+          },
+          yes: function() {
+            addMessage('Good. That means you already understand asymmetric positions. Most of our members are transiting active acquisitions right now.', 'bot');
+            setTimeout(function() {
+              addMessage('We are at <strong>124 / 127 operators</strong>. The next cohort closes <strong>July 15, 2026</strong>, and spots are assigned first-come.', 'bot');
+              setTimeout(function() {
+                addMessage('Verification is <strong>$297</strong> and fully credited toward your first quarter if accepted.', 'bot');
+                renderCheckout('active');
+              }, 350);
+            }, 350);
+          },
+          no: function() {
+            addMessage('No problem. You can re-open this chat anytime before public pricing moves.', 'bot');
+            setTimeout(function() { addMessage('When you are ready to evaluate access, the $297 verification is the entry gate.', 'bot'); }, 350);
+          }
+        }
+      };
+
+      function renderCheckout(track) {
+        const checkoutUrl = resolveCheckoutUrl();
+        const isWhop = (checkoutUrl !== 'payment.html');
+        const target = isWhop ? ' target="_blank" rel="noopener noreferrer"' : '';
+        const checkoutLabel = isWhop ? 'Lock Seat — $297' : 'Start Verification — $297';
+
+        const cta = '<a class="ln-chat-cta" href="' + checkoutUrl + '"' + target + '>' + checkoutLabel + '</a>';
+
+        const laterNote = '<div class="ln-chat-later-note">This cohort closes soon. Spots are issued in the order verification clears.</div>';
+        const ghost = '<button class="ln-chat-cta ghost" id="ln-later-btn" type="button">I’ll decide later</button>';
+
+        setActions(cta + ghost + laterNote);
+
+        var later = document.getElementById('ln-later-btn');
+        if (later) {
+          later.addEventListener('click', function() {
+            addMessage('Understood. If you want to move in the next 24 hours, reply <strong>now</strong> and I will fast-track verification.', 'bot');
+            setActions('<button class="ln-chat-btn" data-action="late-yes" data-next="late">Yes, process now</button><button class="ln-chat-btn" data-action="late-no" data-next="late-no">Not now</button>');
+          });
+        }
+      }
+
+      function showTyping() {
+        const t = document.createElement('div'); t.className = 'ln-chat-message bot'; t.id = 'ln-typing'; t.innerHTML = 'Thinking…'; messages.appendChild(t); messages.scrollTop = messages.scrollHeight;
+      }
+      function hideTyping() { var t = document.getElementById('ln-typing'); if (t) t.remove(); }
+
+      actions.addEventListener('click', function(e) {
+        var btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const action = btn.getAttribute('data-action');
+        const next = btn.getAttribute('data-next');
+
+        addMessage((btn.textContent || '').trim(), 'user', { 'data-action': action });
+
+        if (next === '1') {
+          actions.innerHTML = '';
+          showTyping();
+          setTimeout(function() { hideTyping(); botMessages['1'][action](); }, 420);
+        } else if (next === 'late') {
+          if (action === 'late-yes') {
+            const checkoutUrl = resolveCheckoutUrl();
+            const isWhop = checkoutUrl !== 'payment.html';
+            const target = isWhop ? ' target="_blank" rel="noopener noreferrer"' : '';
+            const cta = '<a class="ln-chat-cta" href="' + checkoutUrl + '"' + target + '>Complete Verification — $297</a><button class="ln-chat-cta ghost" data-action="done" data-next="done">Done</button>';
+            setActions(cta);
+            addMessage('Great. Click the button and finish verification. Your spot is not reserved until payment clears.', 'bot');
+          } else {
+            addMessage('All right. The opening cohort closes soon.', 'bot');
+          }
+          setActions('<button class="ln-chat-btn" data-action="open-payment" data-next="open-payment">Open application</button>');
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('button[data-action="open-payment"]');
+        if (!btn) return;
+        window.location.href = 'payment.html';
+      });
+    })();
+  </script>
+</body>
+</html>

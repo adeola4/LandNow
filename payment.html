@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Apply — LandNow</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ln-brown': '#3d372e',
+            'ln-tan': '#b5925a',
+            'ln-cream': '#e5e0d4',
+            'ln-dark-tan': '#8c7046',
+            'ln-light-tan': '#d6c9b1',
+          },
+          fontFamily: {
+            serif: ['"Libre Baskerville"', 'serif'],
+            sans: ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+<style>
+    h1, h2, h3, .serif-font { font-family: 'Libre Baskerville', serif; letter-spacing: -0.02em; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    @keyframes drift-slow {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+      100% { transform: translateX(0); }
+    }
+    .drift-slow { animation: drift-slow 12s ease-in-out infinite; }
+    @keyframes float-subtle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .float-subtle { animation: float-subtle 4s ease-in-out infinite; }
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+    }
+    .pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+    #lead-trigger {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: #b5925a;
+      color: #1c1917;
+      border: none;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(0);
+      border-radius: 0;
+    }
+    #lead-trigger:hover {
+      background: #8c7046;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+    }
+    #lead-trigger svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    #lead-trigger .lt-text {
+      display: inline-block;
+    }
+    @media (max-width: 480px) {
+      #lead-trigger {
+        bottom: 16px;
+        right: 16px;
+        padding: 10px 16px;
+        font-size: 10px;
+      }
+      #lead-trigger .lt-text-short { display: inline; }
+      #lead-trigger .lt-text-full { display: none; }
+    }
+    @media (min-width: 481px) {
+      #lead-trigger .lt-text-short { display: none; }
+      #lead-trigger .lt-text-full { display: inline; }
+    }
+    /* Lead Capture Popup */
+    #lead-popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    #lead-popup-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #lead-popup {
+      background: #f7efe2;
+      border: 1px solid rgba(199,163,122,0.25);
+      max-width: 480px;
+      width: 100%;
+      padding: 44px 40px 36px;
+      position: relative;
+      transform: translateY(30px) scale(0.97);
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 50px 100px -24px rgba(0,0,0,0.5);
+      border-radius: 0;
+    }
+    #lead-popup-overlay.active #lead-popup {
+      transform: translateY(0) scale(1);
+    }
+    #lead-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(61,55,46,0.3);
+      font-size: 24px;
+      line-height: 1;
+      transition: color 0.2s;
+      padding: 4px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #lead-popup-close:hover { color: #3d372e; }
+    #lead-popup .lp-badge {
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #b5925a;
+      margin-bottom: 14px;
+    }
+    #lead-popup h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.5rem;
+      color: #3d372e;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    #lead-popup .lp-desc {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      color: rgba(61,55,46,0.6);
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+    #lead-popup .lp-desc strong {
+      color: rgba(61,55,46,0.8);
+    }
+    #lead-popup .lp-privacy-note {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5px;
+      color: rgba(61,55,46,0.45);
+      margin-bottom: 22px;
+      line-height: 1.6;
+      padding: 12px 16px;
+      background: rgba(181,146,90,0.06);
+      border-left: 2px solid rgba(181,146,90,0.25);
+    }
+    #lead-popup .lp-field {
+      margin-bottom: 14px;
+    }
+    #lead-popup .lp-field label {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(61,55,46,0.55);
+      margin-bottom: 5px;
+    }
+    #lead-popup .lp-field input {
+      width: 100%;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(61,55,46,0.12);
+      padding: 11px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      color: #3d372e;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      box-sizing: border-box;
+      border-radius: 0;
+    }
+    #lead-popup .lp-field input:focus {
+      border-color: #b5925a;
+      background: rgba(255,255,255,0.9);
+    }
+    #lead-popup .lp-submit {
+      width: 100%;
+      background: #3d372e;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: background 0.25s;
+      margin-top: 6px;
+      border-radius: 0;
+    }
+    #lead-popup .lp-submit:hover { background: #8c7046; }
+    #lead-popup .lp-submit:disabled { opacity: 0.5; cursor: default; }
+    #lead-popup .lp-skip {
+      display: block;
+      text-align: center;
+      margin-top: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(61,55,46,0.35);
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+    #lead-popup .lp-skip:hover { color: #3d372e; }
+    #lead-popup .lp-msg {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 12px;
+      min-height: 18px;
+    }
+    @media (max-width: 480px) {
+      #lead-popup { padding: 32px 24px 28px; }
+      #lead-popup h3 { font-size: 1.25rem; }
+    }
+
+    .ln-footer {
+      background: #1c1917;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ln-footer-inner {
+      display: flex;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ln-footer-left {
+      flex: 0 0 82%;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid rgba(199, 163, 122, 0.12);
+    }
+
+    .ln-footer-right {
+      flex: 0 0 18%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 32px;
+    }
+
+    .ln-footer-nav {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ln-footer-nav li {
+      border-bottom: 1px solid rgba(199, 163, 122, 0.10);
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .ln-footer-nav li:first-child {
+      border-top: 1px solid rgba(199, 163, 122, 0.10);
+    }
+
+    .ln-footer-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: #C7A37A;
+      text-decoration: none;
+      padding: 0 40px;
+      transition: color 0.3s ease, padding-left 0.3s ease;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .ln-footer-nav a:hover {
+      color: #ddc4a0;
+      padding-left: 48px;
+    }
+
+    .ln-footer-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .ln-footer-pill {
+      width: 48px;
+      height: 32px;
+      border-radius: 16px;
+      border: 1px solid rgba(199, 163, 122, 0.25);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #C7A37A;
+    }
+
+    .ln-footer-pill:hover {
+      background: rgba(199, 163, 122, 0.1);
+      border-color: rgba(199, 163, 122, 0.4);
+    }
+
+    .ln-footer-pill svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .ln-footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .ln-footer-social a:hover {
+      background: rgba(199, 163, 122, 0.1);
+      border-color: rgba(199, 163, 122, 0.4);
+      transform: scale(1.05);
+    }
+
+    .ln-footer-email {
+      display: flex;
+      justify-content: center;
+    }
+
+    .ln-footer-email a {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(199, 163, 122, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C7A37A;
+      transition: all 0.3s ease;
+    }
+
+    .ln-footer-email a:hover {
+      background: rgba(199, 163, 122, 0.1);
+      border-color: rgba(199, 163, 122, 0.4);
+      transform: scale(1.05);
+    }
+
+    .ln-footer-email svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ln-footer-legal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ln-footer-legal a,
+    .ln-footer-legal span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(199, 163, 122, 0.45);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(199, 163, 122, 0.08);
+      transition: color 0.3s ease;
+    }
+
+    .ln-footer-legal a:first-child {
+      border-top: 1px solid rgba(199, 163, 122, 0.08);
+    }
+
+    .ln-footer-legal a:hover {
+      color: #C7A37A;
+    }
+
+    .ln-footer-attr {
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      color: rgba(199, 163, 122, 0.35);
+      margin-top: 20px;
+    }
+
+    .ln-footer-wordmark {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0.78;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ln-footer-wordmark h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14vw;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: rgba(199, 163, 122, 0.05);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      line-height: 0.78;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .ln-newsletter {
+      padding: 28px 40px;
+      border-top: 1px solid rgba(199, 163, 122, 0.10);
+    }
+
+    .ln-newsletter-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ln-newsletter p {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(199, 163, 122, 0.55);
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .ln-newsletter-form {
+      display: flex;
+      flex: 1;
+      min-width: 220px;
+      gap: 0;
+    }
+
+    .ln-newsletter-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(199, 163, 122, 0.18);
+      border-right: none;
+      padding: 10px 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      color: #C7A37A;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .ln-newsletter-form input::placeholder {
+      color: rgba(199, 163, 122, 0.3);
+    }
+
+    .ln-newsletter-form input:focus {
+      border-color: rgba(199, 163, 122, 0.45);
+    }
+
+    .ln-newsletter-form button {
+      background: rgba(199, 163, 122, 0.15);
+      border: 1px solid rgba(199, 163, 122, 0.25);
+      color: #C7A37A;
+      padding: 10px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .ln-newsletter-form button:hover {
+      background: rgba(199, 163, 122, 0.25);
+    }
+
+    #newsletter-msg {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      color: rgba(199, 163, 122, 0.6);
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
+
+    @media (max-width: 767px) {
+      .ln-footer-inner {
+        flex-direction: column;
+      }
+
+      .ln-footer-left {
+        flex: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(199, 163, 122, 0.12);
+      }
+
+      .ln-footer-right {
+        flex: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 32px 24px;
+        gap: 24px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ln-footer-email {
+        order: -1;
+        width: 100%;
+      }
+
+      .ln-footer-legal {
+        width: 100%;
+      }
+
+      .ln-footer-nav a {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        padding: 0 24px;
+      }
+
+      .ln-footer-nav a:hover {
+        padding-left: 32px;
+      }
+
+      .ln-footer-wordmark h2 {
+        font-size: 18vw;
+      }
+
+      .ln-newsletter {
+        padding: 24px 24px;
+      }
+
+      .ln-newsletter-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ln-newsletter-form {
+        min-width: unset;
+        width: 100%;
+      }
+    }
+</head>
+<body class="bg-ln-cream text-ln-brown font-sans antialiased">
+
+<nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-ln-cream/90 backdrop-blur-md">
+  <a href="index.html" class="text-sm font-bold tracking-widest uppercase">LandNow</a>
+  <a href="index.html" class="text-[10px] uppercase tracking-[0.2em] text-ln-brown/50 hover:text-ln-brown transition-colors">Back to Home</a>
+</nav>
+
+<main class="py-24 px-6 md:px-20">
+  <div class="max-w-xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center justify-center mb-6">
+        <span class="border border-ln-brown/20 p-2 uppercase tracking-[0.3em] text-[10px]">Access</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl serif-font mb-4 float-subtle">Submit Your Verification Request</h1>
+      <p class="text-ln-brown/70 text-sm max-w-md mx-auto">An entry verification to ensure network quality. Protecting off-market deal listings.</p>
+    </div>
+
+    <div class="bg-ln-light-tan/40 p-8 mb-6 reveal">
+      <div class="flex items-center justify-between pb-6 border-b border-ln-brown/10 mb-6">
+        <span class="text-[10px] uppercase tracking-[0.2em] text-ln-brown/50">Network Verification Fee</span>
+        <div class="flex items-baseline gap-1">
+          <span class="text-3xl serif-font">$297</span>
+          <span class="text-ln-brown/40 text-[10px] uppercase">/ one-time</span>
+        </div>
+      </div>
+
+      <form id="payment-form" class="space-y-6" onsubmit="event.preventDefault();window.location='mailto:foreignaffairsllc2017@gmail.com?subject=LandNow%20Payment%20Request&body='+encodeURIComponent('Name: '+document.getElementById('f-name').value+'\nEmail: '+document.getElementById('f-email').value+'\nTrack: '+document.getElementById('f-track').value)">
+        <div>
+          <label class="text-[10px] uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Full Name</label>
+          <input type="text" id="f-name" required placeholder="Your full name" class="w-full bg-transparent border-0 border-b border-ln-brown/20 pb-3 text-ln-brown outline-none focus:border-ln-tan transition-colors text-sm"/>
+        </div>
+        <div>
+          <label class="text-[10px] uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Email Address</label>
+          <input type="email" id="f-email" required placeholder="name@company.com" class="w-full bg-transparent border-0 border-b border-ln-brown/20 pb-3 text-ln-brown outline-none focus:border-ln-tan transition-colors text-sm"/>
+        </div>
+        <div>
+          <label class="text-[10px] uppercase tracking-[0.2em] text-ln-brown/60 block mb-2">Desired Track</label>
+          <select id="f-track" required class="w-full bg-transparent border-0 border-b border-ln-brown/20 pb-3 text-ln-brown outline-none focus:border-ln-tan transition-colors text-sm">
+            <option value="">Select...</option>
+            <option>Operator</option>
+            <option>Capital</option>
+            <option>Personal Acquisition</option>
+          </select>
+        </div>
+        <button type="submit" class="block w-full bg-ln-brown text-white py-4 text-sm uppercase tracking-[0.2em] text-center hover:bg-ln-dark-tan transition-all mt-6">Submit Access Request</button>
+      </form>
+    </div>
+
+    <div class="bg-ln-light-tan/40 p-6 mb-6 reveal delay-1">
+      <div class="flex items-start gap-3">
+        <span class="text-ln-tan text-lg">*</span>
+        <div>
+          <h4 class="text-sm mb-1">Verification Escrow</h4>
+          <p class="text-xs text-ln-brown/60">This verification charge ensures applicants are active transactional players. All payments are processed through encrypted channels.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center mt-6 text-[10px] uppercase tracking-[0.2em] text-ln-brown/30">Secure connection</p>
+
+    <div class="mt-16 flex justify-center">
+      <div class="inline-flex items-center gap-6 px-6 py-4 bg-ln-light-tan/40">
+        <div class="text-center">
+          <div class="serif-font text-sm font-bold">127</div>
+          <div class="text-[8px] uppercase tracking-[0.1em] text-ln-brown/40 mt-0.5">Active Operators</div>
+        </div>
+        <div class="w-px h-8 bg-ln-brown/10"></div>
+        <div class="text-center">
+          <div class="serif-font text-sm font-bold">48h</div>
+          <div class="text-[8px] uppercase tracking-[0.1em] text-ln-brown/40 mt-0.5">Vetting Turnaround</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="ln-footer" data-nav="dark">
+  <div class="ln-footer-inner">
+    <div class="ln-footer-left">
+      <ul class="ln-footer-nav">
+        <li><a href="https://landnow.isira.club/#membership">Start</a></li>
+        <li><a href="index.html#what-you-get">What You Get</a></li>
+        <li><a href="index.html#ascension">Ascension</a></li>
+        <li><a href="index.html#perks">Perks</a></li>
+        <li><a href="index.html#what-you-get">The Feed</a></li>
+        <li><a href="index.html#membership">Membership</a></li>
+        <li><a href="mailto:foreignaffairsllc2017@gmail.com">Contact</a></li>
+      </ul>
+      <div class="ln-newsletter">
+        <div class="ln-newsletter-inner">
+          <p>Stay in the loop</p>
+          <form class="ln-newsletter-form" id="newsletter-form" novalidate>
+            <input type="email" id="newsletter-email" placeholder="your@email.com" autocomplete="email" required />
+            <button type="submit" id="newsletter-submit">Subscribe</button>
+          </form>
+          <p id="newsletter-msg"></p>
+        </div>
+      </div>
+    </div>
+    <div class="ln-footer-right">
+      <div></div>
+      <div class="ln-footer-email">
+        <a href="mailto:foreignaffairsllc2017@gmail.com" aria-label="Email">
+          <svg fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+            <path
+              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+      <div class="ln-footer-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="mailto:foreignaffairsllc2017@gmail.com">Contact</a>
+        <a href="mailto:foreignaffairsllc2017@gmail.com">Support</a>
+        <span class="ln-footer-attr">&copy; 2026 LandNow.</span>
+      </div>
+    </div>
+  </div>
+  <div class="ln-footer-wordmark">
+    <h2>LANDNOW</h2>
+  </div>
+</footer>
+
+    <!-- Floating Trigger Button -->
+    <button id="lead-trigger" aria-label="Take A Quiz">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+        <line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/>
+      </svg>
+      <span class="lt-text-full">Take A Quiz</span>
+      <span class="lt-text-short">Quiz</span>
+    </button>
+    <!-- Lead Capture Popup -->
+    <div id="lead-popup-overlay" role="dialog" aria-modal="true" aria-label="Stay in the Loop">
+      <div id="lead-popup">
+        <button id="lead-popup-close" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 3l10 10M13 3L3 13"/></svg>
+        </button>
+        <div class="lp-badge">Private Network — LandNow</div>
+        <h3>Access our Water Rights Guide</h3>
+        <p class="lp-desc">A foundational resource prepared for landowners and investors navigating water rights and land acquisition. <strong>Enter your details below to receive the guide.</strong></p>
+        <div class="lp-privacy-note">We'll use this information to deliver your requested resource and occasionally send relevant updates regarding land and water opportunities. You can unsubscribe at any time.</div>
+        <form id="lead-popup-form" novalidate>
+          <div class="lp-field">
+            <label for="lp-name">Full Name</label>
+            <input type="text" id="lp-name" placeholder="Your full name" autocomplete="name" />
+          </div>
+          <div class="lp-field">
+            <label for="lp-email">Email Address</label>
+            <input type="email" id="lp-email" placeholder="you@example.com" autocomplete="email" />
+          </div>
+          <div class="lp-field">
+            <label for="lp-phone">Phone Number</label>
+            <input type="tel" id="lp-phone" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+          </div>
+          <button type="submit" class="lp-submit">Stay in the Loop</button>
+          <div class="lp-msg" id="lp-msg"></div>
+        </form>
+        <button class="lp-skip" id="lead-popup-skip">No thanks, continue browsing</button>
+      </div>
+    </div>
+
+<script>
+  (function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+  })();
+</script>
+
+<script>
+(function () {
+  var overlay = document.getElementById('lead-popup-overlay');
+  var closeBtn = document.getElementById('lead-popup-close');
+  var skipBtn = document.getElementById('lead-popup-skip');
+  var trigger = document.getElementById('lead-trigger');
+  var form = document.getElementById('lead-popup-form');
+  var msg = document.getElementById('lp-msg');
+  var shown = false;
+  var dismissKey = 'ln_popup_dismissed';
+
+  function canShow() {
+    var dismissed = localStorage.getItem(dismissKey);
+    if (!dismissed) return true;
+    var elapsed = Date.now() - parseInt(dismissed, 10);
+    return elapsed > 30 * 24 * 60 * 60 * 1000;
+  }
+
+  function showPopup(force) {
+    if (shown || !overlay) return;
+    if (!force && !canShow()) return;
+    shown = true;
+    setTimeout(function () {
+      overlay.classList.add('active');
+    }, 300);
+  }
+
+  function closePopup() {
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    localStorage.setItem(dismissKey, String(Date.now()));
+  }
+
+  var hasInteracted = false;
+  if (trigger) {
+    trigger.addEventListener('click', function () {
+      hasInteracted = true;
+      localStorage.removeItem(dismissKey);
+          showPopup(true);
+    });
+  }
+
+      if (overlay && canShow()) {
+        setTimeout(function () {
+          if (!shown) showPopup();
+        }, 3000);
+      }
+
+  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (skipBtn) skipBtn.addEventListener('click', closePopup);
+  overlay && overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var name = document.getElementById('lp-name').value.trim();
+      var email = document.getElementById('lp-email').value.trim();
+      var phone = document.getElementById('lp-phone').value.trim();
+
+      var submitBtn = form.querySelector('.lp-submit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      msg.textContent = '';
+
+      try {
+        var res = await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, email: email, phone: phone, leadSource: 'lead-popup' })
+        });
+        var data = await res.json();
+        if (data.success) {
+          msg.style.color = '#4d7c0f';
+          msg.textContent = 'Thank you! Check your inbox for the guide.';
+          localStorage.setItem(dismissKey, String(Date.now()));
+          setTimeout(closePopup, 2000);
+        } else {
+          throw new Error(data.error || 'Submission failed');
+        }
+      } catch (err) {
+        msg.style.color = '#b91c1c';
+        msg.textContent = 'Could not save details — please try again.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Stay in the Loop';
+      }
+    });
+  }
+})();
+
+(function () {
+  var form = document.getElementById('newsletter-form');
+  var msgEl = document.getElementById('newsletter-msg');
+
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var email = document.getElementById('newsletter-email').value.trim();
+      if (!email || !email.includes('@')) {
+        msgEl.style.color = 'rgba(185,28,28,0.8)';
+        msgEl.textContent = 'Enter a valid email.';
+        return;
+      }
+      var btn = document.getElementById('newsletter-submit');
+      btn.disabled = true;
+      btn.textContent = '...';
+      msgEl.textContent = '';
+      try {
+        await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, leadSource: 'newsletter-footer' })
+        });
+        msgEl.style.color = 'rgba(199,163,122,0.8)';
+        msgEl.textContent = 'You\'re subscribed!';
+        form.reset();
+      } catch {
+        msgEl.style.color = 'rgba(185,28,28,0.8)';
+        msgEl.textContent = 'Error — please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      }
+    });
+  }
+})();
+</script>
+<script src="landnow-chat-widget.js" defer></script>
+</body>
+</html>

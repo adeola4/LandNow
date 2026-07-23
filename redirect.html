@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LandNow — Flagship Water Rights Guide</title>
+<meta name="description" content="Access the Flagship Water Rights Guide — a foundational resource prepared for landowners and investors navigating water rights and land acquisition."/>
+<meta property="og:title" content="Flagship Water Rights Guide"/>
+<meta property="og:description" content="A foundational resource prepared for landowners and investors navigating water rights and land acquisition. Delivered by LandNow."/>
+<meta property="og:image" content="https://landnow.isira.club/ebook-cover-v2.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:url" content="https://landnow.isira.club/redirect"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Flagship Water Rights Guide"/>
+<meta name="twitter:description" content="A foundational resource for landowners and investors navigating water rights and land acquisition."/>
+<meta name="twitter:image" content="https://landnow.isira.club/ebook-cover-v2.png"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ln-brown': '#3d372e', 'ln-tan': '#b5925a', 'ln-cream': '#e5e0d4',
+            'ln-dark-tan': '#8c7046', 'ln-light-tan': '#d6c9b1',
+          },
+          fontFamily: { serif: ['"Libre Baskerville"', 'serif'], sans: ['Outfit', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+<style>
+    h1, h2, h3, .serif-font { font-family: 'Libre Baskerville', serif; letter-spacing: -0.02em; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    @keyframes pulse-soft { 0%,100% { opacity: 0.4; } 50% { opacity: 0.7; } }
+    .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+    @keyframes drift-slow {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+      100% { transform: translateX(0); }
+    }
+    .drift-slow { animation: drift-slow 12s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-ln-cream text-ln-brown font-sans antialiased min-h-screen flex flex-col">
+
+<main class="flex-1 flex items-center justify-center px-6">
+  <div class="max-w-lg w-full text-center">
+    <div class="mb-6">
+      <div class="w-16 h-16 mx-auto rounded-full border-2 border-ln-tan/30 flex items-center justify-center pulse-soft">
+        <span class="text-ln-tan text-lg font-bold">LN</span>
+      </div>
+    </div>
+    <h1 class="text-2xl md:text-3xl serif-font mb-4">You're being redirected</h1>
+    <p class="text-sm text-ln-brown/60 leading-relaxed mb-8">Taking you to LandNow — a private network for land and water rights professionals.</p>
+    <div class="w-48 h-[1px] bg-ln-tan/30 mx-auto mb-8"></div>
+    <p class="text-[10px] uppercase tracking-[0.2em] text-ln-brown/30">Redirecting<span class="pulse-soft" id="dots">...</span></p>
+  </div>
+</main>
+
+<footer class="pb-8 text-center">
+  <div class="w-full overflow-hidden leading-none select-none pointer-events-none mb-4">
+    <h2 class="text-[13vw] md:text-[14vw] font-bold tracking-tighter opacity-10 uppercase text-center whitespace-nowrap leading-[0.75] drift-slow">LANDNOW</h2>
+  </div>
+  <p class="text-[10px] uppercase tracking-[0.15em] text-ln-brown/30">&copy; 2026 LandNow. All Rights Reserved.</p>
+</footer>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var redirectTarget = 'https://landnow.isira.club';
+
+  var preserve = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'ref', 'source', 'email'];
+  var queryParts = [];
+
+  preserve.forEach(function (key) {
+    var val = params.get(key);
+    if (val) {
+      queryParts.push(key + '=' + encodeURIComponent(val));
+    }
+  });
+
+  if (queryParts.length) {
+    redirectTarget += '?' + queryParts.join('&');
+  }
+
+  sessionStorage.setItem('ln_lead_source', 'Email Lead');
+  sessionStorage.setItem('ln_lead_redirect', '1');
+
+  var dots = document.getElementById('dots');
+  var count = 3;
+  setInterval(function () {
+    if (!dots) return;
+    var text = '';
+    for (var i = 0; i < count; i++) text += '.';
+    dots.textContent = text;
+    count = count >= 3 ? 1 : count + 1;
+  }, 500);
+
+  setTimeout(function () {
+    window.location.href = redirectTarget;
+  }, 3000);
+})();
+</script>
+</body>
+</html>
